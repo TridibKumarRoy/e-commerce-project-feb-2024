@@ -64,6 +64,9 @@ html{
             background-color: rgba(0, 0, 0, 0);
             color: var(--col5);
             font-weight: bold;
+            & span{
+                margin: 0px 0px 0px 7px;
+            }
         }
         & button:hover{
             background-color: var(--col5);
@@ -73,7 +76,15 @@ html{
 }
 
 /*! footer middle   */
-.footer-middle{}
+.footer-middle{
+    margin-top: 5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5vh;
+    border-bottom: 2px solid var(--col6); 
+
+}
 
 /*! footer bottom   */
 .footer-bottom{}
