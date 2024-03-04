@@ -1,0 +1,131 @@
+/* Navbar.css */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+  }
+  
+  .navbar-logo img {
+    width: 50px; /* Adjust the width as needed */
+    /* border-radius: 30px; */
+  }
+  
+  .navbar-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-links input[type="text"] {
+    padding: 5px;
+    margin-right: 10px;
+  }
+  
+  .navbar-links a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+  }
+  
+  .navbar-dropdown {
+    position: relative;
+    display: inline;
+  }
+  .navbar-dropdown>button {
+    background-color: #333;
+    border: none;
+    color: white;
+  }
+  
+  .navbar-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: #333;
+    min-width: 120px;
+    z-index: 1;
+  }
+  
+  .navbar-dropdown .dropdown-content a {
+    color: white;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+  }
+  
+  .navbar-dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .navbar-auth a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.navbar-auth{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+  }
+  
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+  }
+  .navsearch{
+    border-radius: 10px;
+    width: 93%;
+    margin: 10px 0px;
+    padding: 50px;
+  }
+  
+  @media screen and (min-width: 830px) {
+
+  }
+  @media screen and (max-width: 830px) {
+    .navbar {
+      padding: 10px 30px;
+    }
+  
+    .navbar-links {
+      display: none;
+      flex-direction: column;
+      text-align: center;
+      width: 100%;
+      background-color: #333;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      padding: 50px 20px;
+      box-sizing: border-box;
+    }
+  
+    .navbar-links.open {
+      display: flex;
+      gap: 10px;
+        align-items: baseline;
+    }
+  
+    .navbar-auth {
+        width: 100%;
+      margin-top: 10px;
+      text-align: center;
+    }
+  
+    .hamburger {
+      display: flex;
+    }
+  }
