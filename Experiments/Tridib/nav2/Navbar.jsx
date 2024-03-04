@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar2 = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMenuOpen2, setIsMenuOpen2] = useState(false);
 
@@ -14,31 +14,34 @@ const Navbar = () => {
 
     return (
         <nav className="navbar">
+
             <div className="navbar-logo">
-                <img src="\logo.ico" alt="Logo" />
+                <img src="\logo2.png" alt="Logo" />
             </div>
 
             <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`}>
 
-                    <input type="text" placeholder="Search" className='navsearch' />
-                 {/* <div className="nav-manu"> */}
-                    <a href="#">Store</a>
-                    <a href="#">Services</a>
-                    <a href="#">Community</a>
+                <input type="text" placeholder="Search"  />
+                <div className="nav-menu">
                     <div className="navbar-dropdown">
-                        <button onClick={toggleMenu2}>Dropdown</button>
+                        <button onClick={toggleMenu2}>Store&#9662;</button>
                         <div className="dropdown-content">
-                            <a href="#">Option 1</a>
-                            <a href="#">Option 2</a>
-                            <a href="#">Option 3</a>
+                            <a href="#">Products</a>
+                            <a href="#">Services</a>
+                            <a href="#">Become seller</a>
                         </div>
-                {/* </div> */}
                     </div>
+                    {/* <a href="#">Store</a>
+                    <a href="#">Services</a> */}
+                    <a href="#">Community</a>
+                </div>
 
                 <div className="navbar-auth">
+                    <a href="#" className='cart'>&#x1F6D2;</a>
                     <a href="#" className='loginregister'>Login/SignUp</a>
-                    <a href="#">Account</a>
+                    <a href="#"><img src="profile.png" alt="" className='profile' /></a>
                 </div>
+
             </div>
             <div className="hamburger" onClick={toggleMenu}>
                 <div className="line"></div>
@@ -49,4 +52,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default Navbar2;
