@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import './App.css'
 import {Foooter} from './components/Foooter'
-import {Navbar} from './components/Navbar'
+// import Navbar from './components/Navbar'
 
 function App() {
 
   return (
     <>
-      <Navbar/>
+      {/* <Navbar/> */}
       <Foooter/>
     </>
   )
 }
 
-export default App
+export default App;
