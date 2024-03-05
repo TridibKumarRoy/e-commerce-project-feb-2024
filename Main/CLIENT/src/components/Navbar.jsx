@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './navbar.css';
 
-const Navbar2 = () => {
+export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMenuOpen2, setIsMenuOpen2] = useState(false);
 
@@ -52,4 +52,3 @@ const Navbar2 = () => {
     );
 };
 
-export default Navbar;

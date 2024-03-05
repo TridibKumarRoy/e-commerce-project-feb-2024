@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import './App.css'
 import {Foooter} from './components/Foooter'
-// import Navbar from './components/Navbar'
+import {Navbar} from './components/Navbar'
+import {Body} from './pages/Body'
 
 function App() {
 
   return (
     <>
-      {/* <Navbar/> */}
+      <Navbar/>
+      <Body/>
       <Foooter/>
     </>
   )
