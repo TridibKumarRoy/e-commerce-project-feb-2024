@@ -167,12 +167,12 @@
 
 @media only screen and (min-width: 1250px) {
 
-    h3,
+    .footer h3,
     h2 {
         font-size: 25px;
     }
 
-    a {
+    .footer a {
         font-size: 20px;
     }
 }
@@ -180,12 +180,12 @@
 /* tablet */
 @media only screen and (max-width: 1330px) {
 
-    h3,
+    .footer h3,
     h2 {
         font-size: 30px;
     }
 
-    a {
+    .footer a {
         font-size: 24px;
     }
 
@@ -208,12 +208,12 @@
 /* mobile */
 @media only screen and (max-width: 599px) {
 
-    h3,
+    .footer h3,
     h2 {
         font-size: 30px;
     }
 
-    a {
+    .footer a {
         font-size: 24px;
     }
 
