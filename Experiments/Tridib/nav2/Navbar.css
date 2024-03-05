@@ -1,14 +1,28 @@
+
+/* 
+:root {
+  --col1: #030114;
+  --col2: #141429;
+  --col3: #2a1c74;
+  --col4: #0f969c;
+  --col5: #c4eef8;
+  --col6: #294D61;
+} */
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #333;
+  /* background-color: #333; */
+  background-color: var(--col1);
   color: white;
 }
 
 .navbar-logo img {
   width: 100px;
+  /* Adjust the width as needed */
+  /* border-radius: 30px; */
 }
 
 .profile {
@@ -29,7 +43,7 @@
 }
 
 .navbar-links a {
-  color: white;
+  color: var(--col5);
   text-decoration: none;
   /* margin-right: 20px; */
 }
@@ -40,9 +54,9 @@
 }
 
 .navbar-dropdown>button {
-  background-color: #333;
+  background-color: transparent;
   border: none;
-  color: white;
+  color: var(--col5);
 }
 
 .navbar-dropdown .dropdown-content {
@@ -57,7 +71,7 @@
   /* top: 100%; */
   top: -200px;
   right: -35px;
-  background-color: #333;
+  background-color: var(--col1);
   min-width: 120px;
   z-index: 1;
   opacity: 0;
@@ -81,12 +95,12 @@
 
 .nav-menu a,
 button {
-  transition: color .7s ease;
+  transition: color .3s ease;
 }
 
 .nav-menu a:hover,
 button:hover {
-  color: aquamarine;
+  color: rgb(82, 200, 255);
 }
 
 .nav-menu {
@@ -103,7 +117,8 @@ button:hover {
 }
 
 .loginregister {
-  background-color: rgb(0, 0, 255);
+  /* background-color: rgb(0, 0, 255); */
+  background-color: rgb(56, 56, 175);
   padding: 5px 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 255, 0.521);
@@ -111,6 +126,7 @@ button:hover {
 }
 
 .loginregister:hover {
+  background-color: blue;
   box-shadow: 0px 0px 10px 2px blue;
 }
 
@@ -121,7 +137,7 @@ button:hover {
 }
 
 .cart:hover {
-  text-shadow: 1px -3px 5px rgba(2, 225, 255, 0.699);
+  text-shadow: 1px -3px 10px var(--col5);
 }
 
 
@@ -134,7 +150,7 @@ button:hover {
 .line {
   width: 25px;
   height: 3px;
-  background-color: white;
+  background-color: var(--col5);
   margin: 3px 0;
   border-radius: 5px;
 }
@@ -158,12 +174,14 @@ button:hover {
       flex-direction: column;
       /* text-align: center; */
       width: 100%;
-      background-color: #333;
+      background-color: var(--col2);
       position: absolute;
       top: 60px;
       left: 0;
       padding: 50px 20px;
       box-sizing: border-box;
+      /* border: 3px solid red; */
+      box-shadow: 0px 30px 50px 45px var(--col2);
   }
 
   .nav-menu {
@@ -179,7 +197,7 @@ button:hover {
 
   .navbar-auth {
       width: 100%;
-      margin-top: 10px;
+      margin-top: 30px;
       text-align: center;
       justify-content: space-around;
   }
