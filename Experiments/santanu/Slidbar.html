@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+    <div class="slider">
+        <div class="slides">
+          <!--Radio Buttons-->
+          <input type="radio" id="radio1" name="radio-btn">
+          <input type="radio" id="radio2" name="radio-btn">
+          <input type="radio" id="radio3" name="radio-btn">
+          <input type="radio" id="radio4" name="radio-btn">
+      
+          <!--Images-->
+          <div class="slide first">
+            <img src="https://images.unsplash.com/photo-1551150441-649e0b074fe4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGF1dG9tb3RpdmUlMjBjYXIlMjBwYXJ0c3xlbnwwfHwwfHx8MA%3D%3D">
+            <h2>headlight</h2>
+          </div>
+          <div class="slide">
+            <img src="https://media.istockphoto.com/id/856707194/photo/car-engine-detail.webp?b=1&s=170667a&w=0&k=20&c=WwhVHM3p74lQh382kwHLR1g28DB5a3jp5Emx5JnlDAA=">
+            <h2>engine</h2>
+          </div>
+          <div class="slide">
+            <img src="https://media.istockphoto.com/id/95757561/photo/car-wheel.jpg?s=612x612&w=0&k=20&c=wzzIRbYyVRsNxVO2bMPgW7s5wS1NEt1z2ZODOrvuDdE=">
+            <h2>tyre with alloy</h2>
+          </div>
+          <div class="slide">
+            <img src="https://media.istockphoto.com/id/1214209228/photo/parts-for-scheduled-car-maintenance-oil-air-fuel-filter-water-pumps-motor-belt-car-engine-for.jpg?s=612x612&w=0&k=20&c=SNeQWyh6sRlyrtuwsq7IA78LYNrbYWDGQF0Xd_wiCSA=">
+            <h2>car parts</h2>
+          </div>
+          <!--AUTO Navigation-->
+          <div class="navigation-auto">
+            <div class="auto-btn1"></div>
+            <div class="auto-btn2"></div>
+            <div class="auto-btn3"></div>
+            <div class="auto-btn4"></div>
+          </div>
+        </div>
+      
+        <!--MANUAL Navigation-->
+        <div class="navigation-manual">
+          <label for="radio1" class="manual-btn"></label>
+          <label for="radio2" class="manual-btn"></label>
+          <label for="radio3" class="manual-btn"></label>
+          <label for="radio4" class="manual-btn"></label>
+        </div>
+      </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+</body>
+</html>
+
+<script>
+  let counter = 1;
+setInterval(() => {
+  document.querySelector(`#radio${counter}`).checked = true;
+  counter++;
+  if (counter > 4) {
+    counter = 1;
+  }
+}, 2000);
+</script>
