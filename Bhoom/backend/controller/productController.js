@@ -1,7 +1,9 @@
 const Product = require("../models/productModel")
+const catchAsyncError = require("../middleware/catchAsyncError");
+const ErrorHandler = require("../utils/errorHandler");
 
 //* create product
-exports.createProduct = async (req,res,next)=>{
+exports.createProduct = catchAsyncError(async (req,res,next)=>{
     
     const product = await Product.create(req.body)
     
@@ -10,53 +12,41 @@ exports.createProduct = async (req,res,next)=>{
         product
     })
 
-}
+})
 
 //* get all product
-exports.getAllProducts = async(req,res,next)=>{
+exports.getAllProducts = catchAsyncError(async(req,res,next)=>{
     const product = await Product.find()
     res.status(200).json({
         success: true,
         product
     });
-}
+})
 
 //* get product Details
-exports.getProductDetails = async (req,res,next)=>{
-    try {
+exports.getProductDetails = catchAsyncError(async (req,res,next)=>{
+    
         const product = await Product.findById(req.params.id);
     
-        if(!product){
-            return res.status(500).json({
-                success: false,
-                message: "product not found"
-            });
-        }
+        if (!product) {
+            return next(new ErrorHandler("Product Not found", 404));
+          }
     
         res.status(200).json({
             success: true,
             product
         });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            success: false,
-            message: "product not found"
-        });
-    }
-}
+    
+})
 
 //*update product
-exports.updateProduct = async (req,res,next)=>{
-    try {
+exports.updateProduct = catchAsyncError(async (req,res,next)=>{
+    
         let product = await Product.findById(req.params.id);
     
-        if(!product){
-            return res.status(500).json({
-                success: false,
-                message: "product not found"
-            });
-        }
+        if (!product) {
+            return next(new ErrorHandler("Product Not found", 404));
+          }
     
         product = await Product.findByIdAndUpdate(req.params.id, req.body,{
             new : true,
@@ -69,29 +59,20 @@ exports.updateProduct = async (req,res,next)=>{
             product
         });
         
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            success: false,
-            message: "product not found"
-        });
-    }
+   
 
-}
+})
 
 
-exports.deleteProduct = async (req,res,next)=>{
-    try {
+exports.deleteProduct = catchAsyncError(async (req,res,next)=>{
+   
         let product = await Product.findById(req.params.id);
     
-        if(!product){
-            return res.status(500).json({
-                success: false,
-                message: "product not found"
-            });
-        }
+        if (!product) {
+            return next(new ErrorHandler("Product Not found", 404));
+          }
     
-        // await product.remove();
+    
         await Product.deleteOne({"_id":req.params.id})
 
     
@@ -100,12 +81,6 @@ exports.deleteProduct = async (req,res,next)=>{
             product
         });
         
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            success: false,
-            message: "product not found"
-        });
-    }
+    
 
-}
+})
