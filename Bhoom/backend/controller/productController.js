@@ -6,6 +6,7 @@ const ApiFeatures = require("../utils/apiFeatures")
 //* create product
 exports.createProduct = catchAsyncError(async (req,res,next)=>{
     
+    
     const product = await Product.create(req.body)
     
     res.status(201).json({
@@ -18,14 +19,21 @@ exports.createProduct = catchAsyncError(async (req,res,next)=>{
 //* get all product
 exports.getAllProducts = catchAsyncError(async(req,res,next)=>{
 
-    const apiFeatures= new ApiFeatures(Product.find(),req.query).search().filter();
+    const resultPerPage = 5;
+    const productCount = await Product.countDocuments();
+
+    const apiFeatures= new ApiFeatures(Product.find(),req.query)
+    .search()
+    .filter()
+    .pagination(resultPerPage);
 
     // const product = await Product.find()
     let product = await apiFeatures.query;
 
     res.status(200).json({
         success: true,
-        product
+        product,
+        productCount
     });
 })
 
@@ -40,7 +48,8 @@ exports.getProductDetails = catchAsyncError(async (req,res,next)=>{
     
         res.status(200).json({
             success: true,
-            product
+            product,
+            // productCount
         });
     
 })
