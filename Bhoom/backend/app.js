@@ -11,7 +11,7 @@ app.use(cookieParser())
 app.use("/api/v1",product);
 app.use("/api/v1", user);
 
-//middlewire for error
+//* middleware for error
 app.use(errorMiddleware)
 
 module.exports = app;
