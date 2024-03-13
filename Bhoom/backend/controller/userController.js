@@ -2,7 +2,7 @@ const User = require("../models/userModel")
 const catchAsyncError = require("../middleware/catchAsyncError");
 const ErrorHandler = require("../utils/errorHandler");
 
-//*refistration
+//*registration
 exports.registerUser = catchAsyncError(
     async (req, res, next) => {
         const { name, email, password } = req.body;
