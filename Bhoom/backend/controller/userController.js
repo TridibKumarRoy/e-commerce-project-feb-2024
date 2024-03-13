@@ -47,12 +47,6 @@ exports.loginUser = catchAsyncError(
             return next(new ErrorHandler("invalid Email or password",401))
         }
 
-        // const token = user.getJWTtoken();
-
-        // res.status(200).json({
-        //     success: true,
-        //     token
-        // });
 
         sendToken(user, 200, res);
 
