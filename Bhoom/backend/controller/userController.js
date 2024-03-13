@@ -31,12 +31,15 @@ exports.registerUser = catchAsyncError(
 //* login
 exports.loginUser = catchAsyncError(
     async (req, res, next) => {
+
         const { email, password } = req.body;
+
         if(!email || !password){
             return next(new ErrorHandler("please Enter Email and password",400))
         }
 
-        const user = await User.findOne({email}).select("+password");
+        const user = await User.findOne({ email }).select("+password");
+        
         if(!user){
             return next(new ErrorHandler("invalid Email or password",401))
         }
@@ -46,7 +49,6 @@ exports.loginUser = catchAsyncError(
         if(!isValidPassword){
             return next(new ErrorHandler("invalid Email or password",401))
         }
-
 
         sendToken(user, 200, res);
 
@@ -67,4 +69,5 @@ exports.logOutUser = catchAsyncError(
             success: true,
             message: "Logged Out"
         });
-    })
+    }
+)

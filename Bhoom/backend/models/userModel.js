@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "please enter your name"],
-        maxLength: [30, "name cannot exceed 30 charactors"],
+        maxLength: [30, "name cannot exceed 30 characters"],
         minLength: [4, "Name should have more than 4 characters"],
     },
     email: {
@@ -42,35 +42,35 @@ const userSchema = new mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
-})
-
-//* hashing the password 
-userSchema.pre("save",async function(next){
-
-    if(!this.isModified("password")){
-        next();
-    }
-    
-    this.password =await bcrypt.hash(this.password,10)
-})
-
-//* jwt token generation
-userSchema.methods.getJWTtoken = function(){
-    return jwt.sign({
-        id:this._id
-    },
-    process.env.JWT_SECRET_KEY,
-    {
-        expiresIn:process.env.JWT_EXPIRE_IN
-    }
-    )
-}
-
-//* compare password
-userSchema.methods.comparePassword =async function(password){
-    return await bcrypt.compare(password,this.password);
-}
+});
 
 
+//* hashing the password
+//* Runs before the document is saved to the database.
+//* If the password field is modified, it hashes the password using bcrypt.
+//* @param {Function} next - A function to call to continue processing.
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) { next() };
+    this.password = await bcrypt.hash(this.password, 10);
+});
 
-module.exports = mongoose.model("User",userSchema);
+
+//* Generates a JSON Web Token (JWT) that contains the user's ID.
+//* @returns {string} The JWT.
+userSchema.methods.getJWTtoken = function () {
+    return jwt.sign(
+        {id: this._id},
+        process.env.JWT_SECRET_KEY,
+        {expiresIn: process.env.JWT_EXPIRE_IN}
+    );
+};
+
+
+//* Compares the given password with the hashed password of the user document.
+//* @param {string} password - The password to be compared.
+//* @returns {boolean} `true` if the passwords match, `false` otherwise.
+userSchema.methods.comparePassword = async function (password) {
+    return await bcrypt.compare(password, this.password);
+};
+
+module.exports = mongoose.model("User", userSchema);
