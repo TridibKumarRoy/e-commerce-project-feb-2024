@@ -2,6 +2,7 @@ const User = require("../models/userModel")
 const catchAsyncError = require("../middleware/catchAsyncError");
 const ErrorHandler = require("../utils/errorHandler");
 const sendToken = require("../utils/jwtToken");
+const sendEmail = require("../utils/sendEmail");
 
 //*registration
 exports.registerUser = catchAsyncError(
@@ -71,3 +72,41 @@ exports.logOutUser = catchAsyncError(
         });
     }
 )
+
+//* forgotPassword
+exports.forgotPassword = catchAsyncError(async (req, res, next) => { 
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+    }
+    
+    const resetPassToken = user.getResetPasswordToken();
+
+    await user.save({ validateBeforeSave: false });
+
+    const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetPassToken}`;
+
+    const message = `Password reset token is : \n\n ${resetUrl} \n\nif you have not requested this email than please ignore it`;
+
+    try {
+        await sendEmail({
+          to: user.email,
+          subject: "Bhoom Password Reset",
+          // text: message,
+          message,
+        });
+        
+        res.status(200).json({
+            success: true,
+            message: `Email sent ${user.email} successfully`
+        });
+        
+    } catch (error) {
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+        await user.save({ validateBeforeSave: false });
+
+        return next(new ErrorHandler(error.message, 500));
+    }
+})
