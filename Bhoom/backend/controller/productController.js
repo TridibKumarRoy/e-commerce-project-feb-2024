@@ -72,6 +72,8 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
   });
 });
 
+
+//* delete product
 exports.deleteProduct = catchAsyncError(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
 

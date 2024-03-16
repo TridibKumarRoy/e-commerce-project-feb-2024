@@ -6,15 +6,19 @@ const {getAllProducts,createProduct,getProductDetails,updateProduct,deleteProduc
 router.route("/products").get(getAllProducts);
 
 router
-  .route("/products/new")
-  .post(isAuthenticated, authorizedRole("admin","seller"), createProduct);
+  .route("/admin/products/new")
+  .post(isAuthenticated, authorizedRole("admin", "seller"), createProduct);
 
 
 //todo: in {updateProduct} and {deleteProduct} we should add filters so that sellers can only update and delete their own products
 router
-  .route("/products/:id")
+  .route("/admin/products/:id")
   .get(getProductDetails)
   .put(isAuthenticated, authorizedRole("admin", "seller"), updateProduct)
   .delete(isAuthenticated, authorizedRole("admin", "seller"), deleteProduct);
+
+router
+  .route("/products/:id")
+  .get(getProductDetails);
 
 module.exports = router;
