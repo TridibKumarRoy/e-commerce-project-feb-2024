@@ -10,6 +10,8 @@ const {
   createReview,
   getAllReviews,
   deleteReview,
+  updateProductSeller,
+  deleteProductSeller,
 } = require("../controller/productController");
 
 router.route("/products").get(getAllProducts);
@@ -18,12 +20,16 @@ router
   .route("/admin/products/new")
   .post(isAuthenticated, authorizedRole("admin", "seller"), createProduct);
 
-//todo: in {updateProduct} and {deleteProduct} we should add filters so that sellers can only update and delete their own products
 router
   .route("/admin/products/:id")
   .get(getProductDetails)
-  .put(isAuthenticated, authorizedRole("admin", "seller"), updateProduct)
-  .delete(isAuthenticated, authorizedRole("admin", "seller"), deleteProduct);
+  .put(isAuthenticated, authorizedRole("admin"), updateProduct)
+  .delete(isAuthenticated, authorizedRole("admin"), deleteProduct);
+
+router
+  .route("/seller/products/:id")
+  .put(isAuthenticated, authorizedRole("seller"), updateProductSeller)
+  .delete(isAuthenticated, authorizedRole("seller"), deleteProductSeller);
 
 router.route("/products/:id").get(getProductDetails);
 

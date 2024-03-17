@@ -70,6 +70,11 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
   });
 });
 
+//todo: update product -- seller
+exports.updateProductSeller = catchAsyncError(async (req, res, next) => {
+  
+});
+
 //* delete product
 exports.deleteProduct = catchAsyncError(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
@@ -84,6 +89,11 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
     success: true,
     product,
   });
+});
+
+//todo: delete product --seller
+exports.deleteProductSeller = catchAsyncError(async (req, res, next) => {
+  
 });
 
 //* create new review
