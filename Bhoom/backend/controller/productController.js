@@ -70,9 +70,31 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
   });
 });
 
-//todo: update product -- seller
+//* update product -- seller
 exports.updateProductSeller = catchAsyncError(async (req, res, next) => {
-  
+  let product = await Product.findById(req.params.id);
+  const productCreator = product.user;
+  const seller = req.user._id;
+  const same = productCreator.toString() == seller.toString();
+
+  if (!product) {
+    return next(new ErrorHandler("Product Not found", 404));
+  }
+
+  if (!same) {
+    return next(new ErrorHandler("Not authorized", 404));
+  }
+
+  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    product,
+  });
 });
 
 //* delete product
@@ -91,10 +113,29 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
   });
 });
 
-//todo: delete product --seller
+//* delete product --seller
 exports.deleteProductSeller = catchAsyncError(async (req, res, next) => {
-  
+  let product = await Product.findById(req.params.id);
+  const productCreator = product.user;
+  const seller = req.user._id;
+  const same = productCreator.toString() == seller.toString();
+
+  if (!product) {
+    return next(new ErrorHandler("Product Not found", 404));
+  }
+
+  if (!same) {
+    return next(new ErrorHandler("Not authorized", 404));
+  }
+
+  await Product.deleteOne({ _id: req.params.id });
+
+  res.status(200).json({
+    success: true,
+    product,
+  });
 });
+
 
 //* create new review
 exports.createReview = catchAsyncError(async (req, res, next) => {
