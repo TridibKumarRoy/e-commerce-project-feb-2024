@@ -1,46 +1,48 @@
-const Order = require('../models/orderModel');
+const Order = require("../models/orderModel");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const ErrorHandler = require("../utils/errorHandler");
 const Product = require("../models/productModel");
 
 //* create new order
 exports.newOrder = catchAsyncError(async (req, res, next) => {
+  const {
+    shippingInfo,
+    orderItems,
+    paymentInfo,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
+  } = req.body;
 
-     const {
-       shippingInfo,
-       orderItems,
-       paymentInfo,
-       itemsPrice,
-       taxPrice,
-       shippingPrice,
-       totalPrice,
-     } = req.body;
+  const order = await Order.create({
+    shippingInfo,
+    orderItems,
+    paymentInfo,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
+    paidAt: Date.now(),
+    user: req.user._id,
+  });
 
-     const order = await Order.create({
-       shippingInfo,
-       orderItems,
-       paymentInfo,
-       itemsPrice,
-       taxPrice,
-       shippingPrice,
-       totalPrice,
-       paidAt: Date.now(),
-       user: req.user._id,
-     });
-
-     res.status(201).json({
-       success: true,
-       order,
-     });
+  res.status(201).json({
+    success: true,
+    order,
+  });
 });
 
 //* get order details
 exports.getSingleOrder = catchAsyncError(async (req, res, next) => {
-  const order = await Order.findById(req.params.id).populate("user","name email")
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  );
 
   if (!order) {
     return next(
-      new ErrorHandler(`Order does not exist with Id: ${req.params.id}`,404)
+      new ErrorHandler(`Order does not exist with Id: ${req.params.id}`, 404)
     );
   }
 
@@ -49,7 +51,6 @@ exports.getSingleOrder = catchAsyncError(async (req, res, next) => {
     order,
   });
 });
-
 
 //* get logged in user  Orders
 exports.myOrders = catchAsyncError(async (req, res, next) => {
@@ -61,7 +62,6 @@ exports.myOrders = catchAsyncError(async (req, res, next) => {
   });
 });
 
-
 //* get all Orders -- Admin
 exports.getAllOrders = catchAsyncError(async (req, res, next) => {
   const orders = await Order.find();
@@ -69,7 +69,7 @@ exports.getAllOrders = catchAsyncError(async (req, res, next) => {
   let totalAmount = 0;
 
   orders.forEach((order) => {
-    totalAmount +=  (order.totalPrice * Number(order.orderItems[0].quantity));
+    totalAmount += order.totalPrice * Number(order.orderItems[0].quantity);
   });
 
   res.status(200).json({
@@ -170,8 +170,7 @@ exports.deleteOrder = catchAsyncError(async (req, res, next) => {
     return next(new ErrorHandler("Order not found with this Id", 404));
   }
 
-    // await order.remove();
-    await Order.deleteOne({ _id: req.params.id });
+  await Order.deleteOne({ _id: req.params.id });
 
   res.status(200).json({
     success: true,
@@ -179,38 +178,39 @@ exports.deleteOrder = catchAsyncError(async (req, res, next) => {
 });
 
 
-  //todo: delete Order -- Seller
-  (exports.deleteOrderSeller = catchAsyncError(async (req, res, next) => {
-    const order = await Order.findById(req.params.id);
-    const seller = req.user._id;
+//* delete Order -- Seller
+exports.deleteOrderSeller = catchAsyncError(async (req, res, next) => {
+  const order = await Order.findById(req.params.id);
+  const seller = req.user._id;
+  var orderItems = order.orderItems;
+  const numOfOrderItems = orderItems.length;
 
-    const productCreatorOfOrder = order.orderItems;
+   if (!order) {
+     return next(new ErrorHandler("Order not found with this Id", 404));
+   }
 
-    // const orderItems = forEach((item) => {
-      // const productId = item.product;
-      const productId = productCreatorOfOrder[0].product;
-      const product = Product.findById(productId);
-      // const productCreator = product.user.toString();
+  for (let i = orderItems.length - 1; i >= 0; i--) {
+    const p = orderItems[i];
+    const sellerP = await Product.findById(p.product);
 
-    //   if (product.user.toString() != seller.toString()) {
-    //     return item;
-    //   }
-    // })
-    
-
-
-    if (!order) {
-      return next(new ErrorHandler("Order not found with this Id", 404));
+    if (sellerP.user.toString() !== seller.toString()) {
+      orderItems.splice(i, 1);
     }
+  }
 
-    // await Order.deleteOne({ _id: req.params.id });
+  console.log(numOfOrderItems);
+  console.log(orderItems.length);
+
+  if (orderItems.length == 0) {
+    return next(new ErrorHandler("Order not found with this Id", 404));
+  }
+  else if (numOfOrderItems == orderItems.length) {
+    await Order.deleteOne({ _id: req.params.id });
+  }
 
     res.status(200).json({
       success: true,
-      productCreatorOfOrder,
-      // productCreator,
       seller,
-      productId,
-      product,
+      orderItems,
     });
-  }));
+});
