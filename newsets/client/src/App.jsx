@@ -1,7 +1,7 @@
 import "./App.css";
-import Header from "./components/layouts/Header/Header";
-// import {Footer} from "./components/layout/Footer/Footer";
-// import { Home } from "./components/layout/Home/Home";
+import {Header} from "./components/layouts/Header/Header";
+import {Footer} from "./components/layouts/Footer/Footer";
+import { Home } from "./components/layouts/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -10,10 +10,10 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<Home />} />
          
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
     </>
   );
