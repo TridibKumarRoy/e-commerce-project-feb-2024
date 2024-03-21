@@ -4,7 +4,7 @@ import "./home.css"
 export const Home = () => {
     return (<>
         <main>
-            dhdh
+            this is home
         </main>
     </>)
 }
