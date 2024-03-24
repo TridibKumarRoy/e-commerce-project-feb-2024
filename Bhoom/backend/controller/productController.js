@@ -13,6 +13,7 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
     success: true,
     product,
   });
+  
 });
 
 //* get all product
