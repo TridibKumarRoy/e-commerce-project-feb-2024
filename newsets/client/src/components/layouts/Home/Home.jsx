@@ -1,20 +1,20 @@
-import React, { Fragment } from 'react'
+import React, { useEffect } from 'react'
 import "./home.css"
 // import {cgMouse} from "react-icons/all";
-import Product from "./Product.jsx"
-
+import Product from "./Product.jsx";
 
 export const Home = () => {
+
     return (<>
         <main>
-            <Fragment>
+            <>
                 <div className='banner'>
                     <p>Welcome to Bhoom</p>
                     <h1>Find amazing accessories below</h1>
 
                     <a href="#container">
                         <button>
-                            Scroll <cgMouse/>
+                            Scroll
                         </button>
                     </a>
                 </div>
@@ -23,11 +23,11 @@ export const Home = () => {
 
                 <div className='container' id='container'>
 
-                    <Product product={product}/>
+                    {/* <Product product={product}/> */}
                 </div>
 
 
-            </Fragment>
+            </>
         </main>
     </>)
 }
