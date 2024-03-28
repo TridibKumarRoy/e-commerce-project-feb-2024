@@ -20,10 +20,10 @@ const Product = ({ product }) => {
       <div>
       <ReactStars {...options}/>
         <span className="productCardSpan">(50 reviews)</span>
-        <span>&#8377;{product.price}</span>
       </div>
+        <span>&#8377;{product.price}</span>
     </Link>
   )
 }
 
-export default Product
+export default Product;

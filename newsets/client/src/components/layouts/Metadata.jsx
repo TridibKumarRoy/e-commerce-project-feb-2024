@@ -1,11 +1,12 @@
 import React from 'react'
+import Helmet from "react-helmet";
 
-const Metadata = () => {
+const Metadata = ({title}) => {
     return (
-        <div>
-            
-        </div>
+        <Helmet>
+            <title>{title}</title>
+        </Helmet>
     )
 }
 
-export default Meradata
+export default Metadata;
