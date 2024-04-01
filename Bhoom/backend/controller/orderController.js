@@ -79,7 +79,7 @@ exports.getAllOrders = catchAsyncError(async (req, res, next) => {
   });
 });
 
-//todo: get all Orders -- seller
+//* get all Orders -- seller
 exports.getAllOrdersSeller = catchAsyncError(async (req, res, next) => {
   const orders = await Order.find();
 
