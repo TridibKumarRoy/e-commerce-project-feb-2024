@@ -125,7 +125,7 @@ exports.updateOrder = catchAsyncError(async (req, res, next) => {
   });
 });
 
-//todo: update Order Status -- Seller
+//* update Order Status -- Seller
 exports.updateOrderSeller = catchAsyncError(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
 
