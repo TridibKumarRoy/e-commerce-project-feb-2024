@@ -3,6 +3,8 @@ import "./home.css";
 // import {cgMouse} from "react-icons/all";
 import Product from "./Product";
 import Metadata from "../layouts/Metadata";
+import { clearErrors, getProduct } from "../../actions/productAction";
+import { useSelector, useDispatch } from "react-redux";
 
 const product = {
     name: "BMW z4 v8",
@@ -12,6 +14,17 @@ const product = {
 }
 // const title = 'home page';
 export const Home = () => {
+    const dispatch = useDispatch();
+    const { loading, error, products } = useSelector((state) => state.products);
+
+    useEffect(() => {
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors());
+        }
+        dispatch(getProduct());
+    }, [dispatch, error, alert]);
+    
     return (
         <>
             <Metadata title='home page' />
