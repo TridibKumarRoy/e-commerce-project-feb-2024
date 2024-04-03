@@ -29,7 +29,7 @@ export const Home = () => {
         <>
             <Metadata title='home page' />
             
-            <div className="banner">
+            {/* <div className="banner"> */}
                 {/* <p>Welcome to Bhoom</p>
                 <h1>Find amazing accessories below</h1>
 
@@ -37,7 +37,7 @@ export const Home = () => {
                     <button>Scroll</button>
                 </a> */}
 
-            </div>
+            {/* </div> */}
 
             <div className="mainContainer" id="mainContainer">
 
