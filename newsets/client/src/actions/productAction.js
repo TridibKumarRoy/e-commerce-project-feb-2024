@@ -33,7 +33,7 @@ import {
 
 // Get All Products
 export const getProduct =
-//   (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+  // (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
   () =>
   async (dispatch) => {
     try {
@@ -48,7 +48,7 @@ export const getProduct =
         //   const { data } = await axios.get(link);
         
       const { data } = await axios.get(
-        "/api/v1/products"
+        '/api/v1/products'
       );
 
         // console.log(data);
@@ -62,7 +62,32 @@ export const getProduct =
         payload: error.response.data.message,
       });
     }
-  };
+    };
+  
+
+//!
+
+// export async function getProduct() {
+//   try {
+//     dispatch({ type: ALL_PRODUCT_REQUEST });
+//     const response = await axios.get("/api/v1/products");
+//     console.log(response);
+//     dispatch({
+//         type: ALL_PRODUCT_SUCCESS,
+//         payload: data,
+//       });
+//   } catch (error) {
+//     dispatch({
+//         type: ALL_PRODUCT_FAIL,
+//         payload: error.response.data.message,
+//       });
+//   }
+// }
+
+//!
+
+
+
 
 // Get All Products For Admin
 // export const getAdminProduct = () => async (dispatch) => {
