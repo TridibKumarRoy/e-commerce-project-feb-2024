@@ -30,12 +30,12 @@ export const Home = () => {
             <Metadata title='home page' />
             
             <div className="banner">
-                <p>Welcome to Bhoom</p>
+                {/* <p>Welcome to Bhoom</p>
                 <h1>Find amazing accessories below</h1>
 
                 <a href="#mainContainer">
                     <button>Scroll</button>
-                </a>
+                </a> */}
 
             </div>
 
