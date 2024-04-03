@@ -29,6 +29,8 @@ exports.getAllProducts = catchAsyncError(async (req, res, next) => {
   // const product = await Product.find()
   let product = await apiFeatures.query;
 
+  // console.log(product);
+
   res.status(200).json({
     success: true,
     product,
