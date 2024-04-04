@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./navbar.css";
 
-const Header = () => {
+export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenuOpen2, setIsMenuOpen2] = useState(false);
 
@@ -55,4 +55,4 @@ const Header = () => {
   );
 }
 
-export default Header
+// export default Header

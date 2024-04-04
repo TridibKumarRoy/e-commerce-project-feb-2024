@@ -1,8 +1,9 @@
 import "./App.css";
-import Header from "./components/layout/Header/Header";
-import {Footer} from "./components/layout/Footer/Footer";
-import { Home } from "./components/layout/Home/Home";
+import { Header } from "./components/layouts/Header/Header";
+import { Footer } from "./components/layouts/Footer/Footer";
+import { Home } from "./components/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Error404 } from './components/layouts/Error404/Error404'
 
 function App() {
   return (
@@ -11,13 +12,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/service" element={<Service />} />
-          <Route path="/logout" element={<Logout />} />
-          (<Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />)
-          <Route path="*" element={<Error />} /> */}
+          <Route path="*" element={<Error404 />} />
+
         </Routes>
         <Footer />
       </BrowserRouter>
