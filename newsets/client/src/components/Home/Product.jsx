@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactStars from "react-rating-stars-component"
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 
 const options = {
@@ -14,15 +14,17 @@ const options = {
 
 const Product = ({ product }) => {
   return (
-    <Link className='productCard'>
+    // <NavLink className='productCard' to="/productdetails">
+    <a href="/productdetails" className='productCard'>
       <img src={product.image[0].url} alt={product.name} srcset="" />
       <p>{product.name}</p>
       <div>
       <ReactStars {...options}/>
         <span className="productCardSpan">(50 reviews)</span>
       </div>
-        <span>&#8377;{product.price}</span>
-    </Link>
+      <span>&#8377;{product.price}</span>
+    </a>
+    // </NavLink>
   )
 }
 export default Product;

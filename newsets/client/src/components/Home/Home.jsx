@@ -6,10 +6,18 @@ import Slider from './Slider';
 
 const product = {
     name: "BMW z4 v8",
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     image: [{ url: "https://www.bmwofdayton.com/static/dealer-20050/BMW-M850i-engine.jpg" }],
     price: 100000,
+    ratings: 4.5,
+    category: 'Electronics',
+    stock: 10,
+    numberOfReviews: 5,
+    reviews: ['Great product!', 'Fast shipping', 'Excellent quality'],
     _id: "fkfasfhuus8fu"
 }
+
+
 // const title = 'home page';
 export const Home = () => {
 
@@ -29,6 +37,10 @@ export const Home = () => {
 
                 <h2 className="homeHeading">Featured Accessories</h2>
                 <div className="container" id="container">
+
+                    
+
+                    {/* <a href="/productDetails"> <Product product={product} /> </a> */}
 
                     <Product product={product} />
                     <Product product={product} />
