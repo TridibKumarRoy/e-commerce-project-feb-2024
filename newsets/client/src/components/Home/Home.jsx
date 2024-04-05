@@ -5,6 +5,7 @@ import Product from "./Product";
 import Metadata from "../layouts/Metadata";
 import { clearErrors, getProduct } from "../../actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
+import Slider from './Slider'; 
 
 const product = {
     name: "BMW z4 v8",
@@ -24,11 +25,19 @@ export const Home = () => {
         }
         dispatch(getProduct());
     }, [dispatch, error, alert]);
+
+
+    const images = [
+        'https://www.bmwofdayton.com/static/dealer-20050/BMW-M850i-engine.jpg',
+        'https://www.bmwofdayton.com/static/dealer-20050/BMW-M850i-engine.jpg',
+        'https://www.bmwofdayton.com/static/dealer-20050/BMW-M850i-engine.jpg',
+    ];
     
     return (
         <>
             <Metadata title='home page' />
-            
+
+            <Slider images={images} />
             {/* <div className="banner"> */}
                 {/* <p>Welcome to Bhoom</p>
                 <h1>Find amazing accessories below</h1>

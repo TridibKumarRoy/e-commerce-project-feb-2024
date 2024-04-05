@@ -14,9 +14,10 @@ export const Header = () => {
 
   return (
     <nav className="navbar">
+      <a href="/">
       <div className="navbar-logo">
         <img src=".\logo.png" alt="Logo" />
-      </div>
+      </div></a>
 
       <div className={`navbar-links ${isMenuOpen ? "open" : ""}`}>
         <input type="text" placeholder="Search" />
@@ -38,7 +39,7 @@ export const Header = () => {
           <a href="#" className="cart">
             &#x1F6D2;
           </a>
-          <a href="#" className="loginregister">
+          <a href="/login" className="loginregister">
             Login/SignUp
           </a>
           <a href="#">

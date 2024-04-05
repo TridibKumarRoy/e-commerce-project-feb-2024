@@ -1,200 +1,188 @@
-// import React, { Fragment, useRef, useState, useEffect } from "react";
-// import "./LoginSignUp.css";
-// import Loader from "../layout/Loader/Loader";
-// import { Link } from "react-router-dom";
-// import MailOutlineIcon from "@material-ui/icons/MailOutline";
-// import LockOpenIcon from "@material-ui/icons/LockOpen";
-// import FaceIcon from "@material-ui/icons/Face";
-// import { useDispatch, useSelector } from "react-redux";
-// import { clearErrors, login, register } from "../../actions/userAction";
-// import { useAlert } from "react-alert";
+import React, { useState } from "react";
+import "./LoginSignUp.css";
+import { useDispatch } from 'react-redux';
 
-// const LoginSignUp = ({ history, location }) => {
-//     const dispatch = useDispatch();
-//     const alert = useAlert();
 
-//     const { error, loading, isAuthenticated } = useSelector(
-//         (state) => state.user
-//     );
+const LoginSignUp = () => {
 
-//     const loginTab = useRef(null);
-//     const registerTab = useRef(null);
-//     const switcherTab = useRef(null);
+    const [isLabelActive, setIsLabelActive] = useState(false);
+    const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
 
-//     const [loginEmail, setLoginEmail] = useState("");
-//     const [loginPassword, setLoginPassword] = useState("");
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        setIsLabelActive(value !== '');
+    };
 
-//     const [user, setUser] = useState({
-//         name: "",
-//         email: "",
-//         password: "",
-//     });
+    const handleToggleClick = () => {
+        setIsLoginFormVisible(!isLoginFormVisible);
+    };
 
-//     const { name, email, password } = user;
+    const handleFooterLinkClick = () => {
+        // Handle footer link click logic here
+    };
 
-//     const [avatar, setAvatar] = useState("/Profile.png");
-//     const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
+    return (
+        <>
 
-//     const loginSubmit = (e) => {
-//         e.preventDefault();
-//         dispatch(login(loginEmail, loginPassword));
-//     };
+            <div className="card-container">
 
-//     const registerSubmit = (e) => {
-//         e.preventDefault();
+                <div className="toggle" onClick={handleToggleClick}>
+                    <i className="fa fa-user fa-pencil fa-lg"></i>
+                    <div className="tooltip">{isLoginFormVisible ? 'Sign up' : 'Login'}</div>
+                </div>
 
-//         const myForm = new FormData();
+                {isLoginFormVisible ? <div>
 
-//         myForm.set("name", name);
-//         myForm.set("email", email);
-//         myForm.set("password", password);
-//         myForm.set("avatar", avatar);
-//         dispatch(register(myForm));
-//     };
+                    
 
-//     const registerDataChange = (e) => {
-//         if (e.target.name === "avatar") {
-//             const reader = new FileReader();
+                    <div className="card login-register login-reset">
+                        <h1 className="title">Login</h1>
+                        <form>
+                            <div className="input-container has-feedback">
+                                <input
+                                    type="text"
+                                    id="Username"
+                                    name="Username"
+                                    required
+                                    autoComplete="off"
+                                    pattern="[\w_-]{3,20}"
+                                    title="Must contain from 3 to 20 characters such as any letter, number, an underscore, or a hyphen."
+                                    onChange={handleInputChange}
+                                    onBlur={handleInputChange}
+                                    onFocus={handleInputChange}
+                                />
+                                <label htmlFor="Username" className={isLabelActive ? 'active' : ''}>
+                                    Username
+                                </label>
+                                <i className="fa fa-user form-control-feedback"></i>
+                                <div className="check"></div>
+                                <div className="bar"></div>
+                            </div>
+                            <div className="input-container has-feedback">
+                                <input
+                                    type="Password"
+                                    id="Password"
+                                    name="Password"
+                                    required
+                                    autoComplete="off"
+                                    pattern="[\w_-]{3,20}"
+                                    title="Must contain from 3 to 20 characters such as any letter, number, an underscore, or a hyphen."
+                                    onChange={handleInputChange}
+                                    onBlur={handleInputChange}
+                                    onFocus={handleInputChange}
+                                />
+                                <label htmlFor="Password" className={isLabelActive ? 'active' : ''}>
+                                    Password
+                                </label>
+                                <i className="fa fa-user form-control-feedback"></i>
+                                <div className="check"></div>
+                                <div className="bar"></div>
+                            </div>
 
-//             reader.onload = () => {
-//                 if (reader.readyState === 2) {
-//                     setAvatarPreview(reader.result);
-//                     setAvatar(reader.result);
-//                 }
-//             };
+                           
+                            <div className="button-container">
+                                <button className="rkmd-btn btn-lightBlue ripple-effect float-right">
+                                    <span>Sign in</span>
+                                </button>
+                            </div>
+                            <div className="forgotPassword">
+                                <a href="#" onClick={handleFooterLinkClick}>
+                                    Forgot your password?
+                                </a>
+                            </div>
+                        </form>
+                    </div>
 
-//             reader.readAsDataURL(e.target.files[0]);
-//         } else {
-//             setUser({ ...user, [e.target.name]: e.target.value });
-//         }
-//     };
 
-//     const redirect = location.search ? location.search.split("=")[1] : "/account";
+                </div>
+                    :
+                    <div>
+                        
 
-//     useEffect(() => {
-//         if (error) {
-//             alert.error(error);
-//             dispatch(clearErrors());
-//         }
+                        {/* Create an account */}
+                        <div className="card login-register">
+                            <h1 className="title">Create an account</h1>
+                            <form>
+                                {/* Username input */}
+                                <div className="input-container has-feedback">
+                                    <input
+                                        type="text"
+                                        id="Username"
+                                        name="Username"
+                                        required
+                                        autoComplete="off"
+                                        pattern="[\w_-]{3,20}"
+                                        title="Username must contain from 3 to 20 characters such as any letter, number, an underscore, or a hyphen."
+                                        onChange={handleInputChange}
+                                        onBlur={handleInputChange}
+                                        onFocus={handleInputChange}
+                                    />
+                                    <label htmlFor="Username" className={isLabelActive ? 'active' : ''}>
+                                        Username
+                                    </label>
+                                    <i className="fa fa-user form-control-feedback"></i>
+                                    <div className="check"></div>
+                                    <div className="bar"></div>
+                                </div>
+                                {/* Email input */}
+                                <div className="input-container has-feedback">
+                                    <input
+                                        type="email"
+                                        id="E-mail"
+                                        name="E-mail"
+                                        required
+                                        autoComplete="off"
+                                        pattern="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"
+                                        title="Not an e-mail!"
+                                    />
+                                    <label htmlFor="E-mail" className={isLabelActive ? 'active' : ''}>
+                                        E-mail
+                                    </label>
+                                    <i className="fa fa-envelope form-control-feedback"></i>
+                                    <div className="check"></div>
+                                    <div className="bar"></div>
+                                </div>
+                                {/* Password input */}
+                                <div className="input-container has-feedback">
+                                    <input
+                                        type="password"
+                                        id="Password"
+                                        name="Password"
+                                        required
+                                        autoComplete="off"
+                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}"
+                                        title="Password must contain at least one number and one uppercase and lowercase letter, and from 8 to 20 characters."
+                                    />
+                                    <label htmlFor="Password" className={isLabelActive ? 'active' : ''}>
+                                        Password
+                                    </label>
+                                    <i className="fa fa-lock form-control-feedback"></i>
+                                    <div className="check"></div>
+                                    <div className="bar"></div>
+                                </div>
+                               
+                                {/* Register button */}
+                                <div className="button-container">
+                                    <button><span>Register</span></button>
+                                </div>
+                            </form>
+                        </div>
 
-//         if (isAuthenticated) {
-//             history.push(redirect);
-//         }
-//     }, [dispatch, error, alert, history, isAuthenticated, redirect]);
 
-//     const switchTabs = (e, tab) => {
-//         if (tab === "login") {
-//             switcherTab.current.classList.add("shiftToNeutral");
-//             switcherTab.current.classList.remove("shiftToRight");
 
-//             registerTab.current.classList.remove("shiftToNeutralForm");
-//             loginTab.current.classList.remove("shiftToLeft");
-//         }
-//         if (tab === "register") {
-//             switcherTab.current.classList.add("shiftToRight");
-//             switcherTab.current.classList.remove("shiftToNeutral");
 
-//             registerTab.current.classList.add("shiftToNeutralForm");
-//             loginTab.current.classList.add("shiftToLeft");
-//         }
-//     };
+                </div>}
 
-//     return (
-//         <Fragment>
-//             {loading ? (
-//                 <Loader />
-//             ) : (
-//                 <Fragment>
-//                     <div className="LoginSignUpContainer">
-//                         <div className="LoginSignUpBox">
-//                             <div>
-//                                 <div className="login_signUp_toggle">
-//                                     <p onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
-//                                     <p onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
-//                                 </div>
-//                                 <button ref={switcherTab}></button>
-//                             </div>
-//                             <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
-//                                 <div className="loginEmail">
-//                                     <MailOutlineIcon />
-//                                     <input
-//                                         type="email"
-//                                         placeholder="Email"
-//                                         required
-//                                         value={loginEmail}
-//                                         onChange={(e) => setLoginEmail(e.target.value)}
-//                                     />
-//                                 </div>
-//                                 <div className="loginPassword">
-//                                     <LockOpenIcon />
-//                                     <input
-//                                         type="password"
-//                                         placeholder="Password"
-//                                         required
-//                                         value={loginPassword}
-//                                         onChange={(e) => setLoginPassword(e.target.value)}
-//                                     />
-//                                 </div>
-//                                 <Link to="/password/forgot">Forget Password ?</Link>
-//                                 <input type="submit" value="Login" className="loginBtn" />
-//                             </form>
-//                             <form
-//                                 className="signUpForm"
-//                                 ref={registerTab}
-//                                 encType="multipart/form-data"
-//                                 onSubmit={registerSubmit}
-//                             >
-//                                 <div className="signUpName">
-//                                     <FaceIcon />
-//                                     <input
-//                                         type="text"
-//                                         placeholder="Name"
-//                                         required
-//                                         name="name"
-//                                         value={name}
-//                                         onChange={registerDataChange}
-//                                     />
-//                                 </div>
-//                                 <div className="signUpEmail">
-//                                     <MailOutlineIcon />
-//                                     <input
-//                                         type="email"
-//                                         placeholder="Email"
-//                                         required
-//                                         name="email"
-//                                         value={email}
-//                                         onChange={registerDataChange}
-//                                     />
-//                                 </div>
-//                                 <div className="signUpPassword">
-//                                     <LockOpenIcon />
-//                                     <input
-//                                         type="password"
-//                                         placeholder="Password"
-//                                         required
-//                                         name="password"
-//                                         value={password}
-//                                         onChange={registerDataChange}
-//                                     />
-//                                 </div>
 
-//                                 <div id="registerImage">
-//                                     <img src={avatarPreview} alt="Avatar Preview" />
-//                                     <input
-//                                         type="file"
-//                                         name="avatar"
-//                                         accept="image/*"
-//                                         onChange={registerDataChange}
-//                                     />
-//                                 </div>
-//                                 <input type="submit" value="Register" className="signUpBtn" />
-//                             </form>
-//                         </div>
-//                     </div>
-//                 </Fragment>
-//             )}
-//         </Fragment>
-//     );
-// };
+               
 
-// export default LoginSignUp;
+
+               
+
+
+            </div>
+        </>
+    );
+};
+
+export default LoginSignUp;

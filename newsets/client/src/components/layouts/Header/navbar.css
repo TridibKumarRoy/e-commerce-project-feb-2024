@@ -16,6 +16,7 @@
     /* background-color: #333; */
     background-color: var(--col1);
     color: white;
+    z-index: 3;
 }
 
 .navbar-logo img {

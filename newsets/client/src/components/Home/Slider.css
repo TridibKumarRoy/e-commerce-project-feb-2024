@@ -1,0 +1,67 @@
+.slider-container {
+    position: relative;
+    height: 60vh;
+    /* width: 90%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* z-index: -2; */
+}
+
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    height: 60vh;
+}
+
+.slide-wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+    /* Add transition for smooth sliding */
+}
+
+.slide {
+    flex: 0 0 100%;
+    /* Ensure each slide takes up full width of slider */
+}
+
+.slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.prev-btn,
+.next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+    z-index: 1;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .slider-container {
+        height: 40vh;
+        /* Adjust height for smaller screens */
+    }
+
+    .slide-img {
+        height: auto;
+        /* Ensure image maintains aspect ratio */
+    }
+}
