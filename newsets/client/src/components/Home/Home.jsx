@@ -13,18 +13,6 @@ const product = {
 // const title = 'home page';
 export const Home = () => {
 
-    // const dispatch = useDispatch();
-    // const { loading, error, products } = useSelector((state) => state.products);
-
-    // useEffect(() => {
-    //     if (error) {
-    //         alert.error(error);
-    //         dispatch(clearErrors());
-    //     }
-    //     dispatch(getProduct());
-    // }, [dispatch, error, alert]);
-
-
     const images = [
         'https://www.bmwofdayton.com/static/dealer-20050/BMW-M850i-engine.jpg',
         'https://www.bmwofdayton.com/static/dealer-20050/BMW-M850i-engine.jpg',
