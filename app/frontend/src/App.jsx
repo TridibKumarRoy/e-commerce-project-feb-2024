@@ -1,391 +1,172 @@
+import { useEffect } from "react";
+import Home from "./pages/Home";
+import "jquery";
+
 function App() {
+  useEffect(() => {
+    (function ($) {
+      "use strict";
+
+      // navbarDropdown
+      if ($(window).width() < 992) {
+        $(".navigation .dropdown-toggle").on("click", function () {
+          $(this).siblings(".dropdown-menu").animate(
+            {
+              height: "toggle",
+            },
+            300
+          );
+        });
+      }
+
+      //  Count Up
+      function counter() {
+        var oTop;
+        if ($(".counter").length !== 0) {
+          oTop = $(".counter").offset().top - window.innerHeight;
+        }
+        if ($(window).scrollTop() > oTop) {
+          $(".counter").each(function () {
+            var $this = $(this),
+              countTo = $this.attr("data-count");
+            $({
+              countNum: $this.text(),
+            }).animate(
+              {
+                countNum: countTo,
+              },
+              {
+                duration: 1000,
+                easing: "swing",
+                step: function () {
+                  $this.text(Math.floor(this.countNum));
+                },
+                complete: function () {
+                  $this.text(this.countNum);
+                },
+              }
+            );
+          });
+        }
+      }
+      $(window).on("scroll", function () {
+        counter();
+        //.Scroll to top show/hide
+        var scrollToTop = $(".scroll-top-to"),
+          scroll = $(window).scrollTop();
+        if (scroll >= 200) {
+          scrollToTop.fadeIn(200);
+        } else {
+          scrollToTop.fadeOut(100);
+        }
+      });
+      // scroll-to-top
+      $(".scroll-top-to").on("click", function () {
+        $("body,html").animate(
+          {
+            scrollTop: 0,
+          },
+          500
+        );
+        return false;
+      });
+
+      $(".video-box").click(function () {
+        var video =
+          '<div class="embed-responsive embed-responsive-16by9 mb-4"><iframe class="embed-responsive-item" src="' +
+          $(this).attr("data-video-url") +
+          '" allowfullscreen></iframe></div>';
+        $(this).parent(".video").replaceWith(video);
+      });
+
+      // niceSelect
+      $("select:not(.ignore)").niceSelect();
+
+      // blog post-slider
+      //   $(".post-slider").slick({
+      //     // Slick options here
+      //     dots: false,
+      //     arrows: false,
+      //     slidesToShow: 1,
+      //     slidesToScroll: 1,
+      //     adaptiveHeight: true,
+      //     autoplay: true,
+      //     fade: true,
+      // });
+
+      // Client Slider
+      // $(".category-slider").slick({
+      //   dots: false,
+      //   slidesToShow: 5,
+      //   slidesToScroll: 1,
+      //   autoplay: true,
+      //   autoplaySpeed: 1500,
+      //   nextArrow: '<i class="fa fa-chevron-right arrow-right"></i>',
+      //   prevArrow: '<i class="fa fa-chevron-left arrow-left"></i>',
+      //   responsive: [
+      //     {
+      //       breakpoint: 1024,
+      //       settings: {
+      //         slidesToShow: 4,
+      //         slidesToScroll: 1,
+      //         infinite: true,
+      //         dots: false,
+      //       },
+      //     },
+      //     {
+      //       breakpoint: 600,
+      //       settings: {
+      //         slidesToShow: 3,
+      //         slidesToScroll: 1,
+      //       },
+      //     },
+      //     {
+      //       breakpoint: 480,
+      //       settings: {
+      //         slidesToShow: 3,
+      //         slidesToScroll: 1,
+      //         arrows: false,
+      //       },
+      //     },
+      //   ],
+      // });
+
+      // product-slider
+      // $(".product-slider").slick({
+      //   dots: true,
+      //   arrows: true,
+      //   slidesToShow: 1,
+      //   slidesToScroll: 1,
+      //   autoplay: false,
+      //   autoplaySpeed: false,
+      //   nextArrow: '<i class="fa fa-chevron-right arrow-right"></i>',
+      //   prevArrow: '<i class="fa fa-chevron-left arrow-left"></i>',
+      //   customPaging: function (slider, i) {
+      //     var image = $(slider.$slides[i]).data("image");
+      //     return (
+      //       '<img class="img-fluid" src="' + image + '" alt="product-img">'
+      //     );
+      //   },
+      // });
+
+      // tooltip
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+
+      // bootstrap slider range
+      $(".range-track").slider({});
+      $(".range-track").on("slide", function (slideEvt) {
+        $(".value").text(
+          "$" + slideEvt.value[0] + " - " + "$" + slideEvt.value[1]
+        );
+      });
+    })(jQuery);
+  }, []);
+
   return (
     <>
-      {/* Navbar */}
-      <section class="top-header">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 col-xs-12 col-sm-4">
-              <div class="contact-number">
-                <i class="tf-ion-ios-telephone"></i>
-                <span>0129- 12323-123123</span>
-              </div>
-            </div>
-            <div class="col-md-4 col-xs-12 col-sm-4">
-              <div class="logo text-center">
-                <a href="index.html">
-                  <svg
-                    width="135px"
-                    height="29px"
-                    viewBox="0 0 155 29"
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                  >
-                    <g
-                      id="Page-1"
-                      stroke="none"
-                      stroke-width="1"
-                      fill="none"
-                      fill-rule="evenodd"
-                      font-size="40"
-                      font-family="AustinBold, Austin"
-                      font-weight="bold"
-                    >
-                      <g
-                        id="Group"
-                        transform="translate(-108.000000, -297.000000)"
-                        fill="#000000"
-                      >
-                        <text id="AVIATO">
-                          <tspan x="108.94" y="325">
-                            AVIATO
-                          </tspan>
-                        </text>
-                      </g>
-                    </g>
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div class="col-md-4 col-xs-12 col-sm-4">
-              <ul class="top-menu text-right list-inline">
-                <li class="dropdown cart-nav dropdown-slide">
-                  <a
-                    href="#!"
-                    class="dropdown-toggle"
-                    data-toggle="dropdown"
-                    data-hover="dropdown"
-                  >
-                    <i class="tf-ion-android-cart"></i>Cart
-                  </a>
-                  <div class="dropdown-menu cart-dropdown">
-                    <div class="media">
-                      <a class="pull-left" href="#!">
-                        <img
-                          class="media-object"
-                          src="images/shop/cart/cart-1.jpg"
-                          alt="image"
-                        />
-                      </a>
-                      <div class="media-body">
-                        <h4 class="media-heading">
-                          <a href="#!">Ladies Bag</a>
-                        </h4>
-                        <div class="cart-price">
-                          <span>1 x</span>
-                          <span>1250.00</span>
-                        </div>
-                        <h5>
-                          <strong>$1200</strong>
-                        </h5>
-                      </div>
-                      <a href="#!" class="remove">
-                        <i class="tf-ion-close"></i>
-                      </a>
-                    </div>
-                    <div class="media">
-                      <a class="pull-left" href="#!">
-                        <img
-                          class="media-object"
-                          src="images/shop/cart/cart-2.jpg"
-                          alt="image"
-                        />
-                      </a>
-                      <div class="media-body">
-                        <h4 class="media-heading">
-                          <a href="#!">Ladies Bag</a>
-                        </h4>
-                        <div class="cart-price">
-                          <span>1 x</span>
-                          <span>1250.00</span>
-                        </div>
-                        <h5>
-                          <strong>$1200</strong>
-                        </h5>
-                      </div>
-                      <a href="#!" class="remove">
-                        <i class="tf-ion-close"></i>
-                      </a>
-                    </div>
-
-                    <div class="cart-summary">
-                      <span>Total</span>
-                      <span class="total-price">$1799.00</span>
-                    </div>
-                    <ul class="text-center cart-buttons">
-                      <li>
-                        <a href="cart.html" class="btn btn-small">
-                          View Cart
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="checkout.html"
-                          class="btn btn-small btn-solid-border"
-                        >
-                          Checkout
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li class="dropdown search dropdown-slide">
-                  <a
-                    href="#!"
-                    class="dropdown-toggle"
-                    data-toggle="dropdown"
-                    data-hover="dropdown"
-                  >
-                    <i class="tf-ion-ios-search-strong"></i> Search
-                  </a>
-                  <ul class="dropdown-menu search-dropdown">
-                    <li>
-                      <form action="post">
-                        <input
-                          type="search"
-                          class="form-control"
-                          placeholder="Search..."
-                        />
-                      </form>
-                    </li>
-                  </ul>
-                </li>
-                <li class="commonSelect">
-                  <select class="form-control">
-                    <option>EN</option>
-                    <option>DE</option>
-                    <option>FR</option>
-                    <option>ES</option>
-                  </select>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Menu */}
-      <section class="menu">
-        <nav class="navbar navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <h2 class="menu-title">Main Menu</h2>
-              <button
-                type="button"
-                class="navbar-toggle collapsed"
-                data-toggle="collapse"
-                data-target="#navbar"
-                aria-expanded="false"
-                aria-controls="navbar"
-              >
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse text-center">
-              <ul class="nav navbar-nav">
-                <li class="dropdown ">
-                  <a href="index.html">Home</a>
-                </li>
-                <li class="dropdown dropdown-slide">
-                  <a
-                    href="#!"
-                    class="dropdown-toggle"
-                    data-toggle="dropdown"
-                    data-hover="dropdown"
-                    data-delay="350"
-                    role="button"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Shop <span class="tf-ion-ios-arrow-down"></span>
-                  </a>
-                  <div class="dropdown-menu">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 mb-sm-3">
-                        <ul>
-                          <li class="dropdown-header">Pages</li>
-                          <li role="separator" class="divider"></li>
-                          <li>
-                            <a href="shop.html">Shop</a>
-                          </li>
-                          <li>
-                            <a href="checkout.html">Checkout</a>
-                          </li>
-                          <li>
-                            <a href="cart.html">Cart</a>
-                          </li>
-                          <li>
-                            <a href="pricing.html">Pricing</a>
-                          </li>
-                          <li>
-                            <a href="confirmation.html">Confirmation</a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="col-lg-6 col-md-6 mb-sm-3">
-                        <ul>
-                          <li class="dropdown-header">Layout</li>
-                          <li role="separator" class="divider"></li>
-                          <li>
-                            <a href="product-single.html">Product Details</a>
-                          </li>
-                          <li>
-                            <a href="shop-sidebar.html">Shop With Sidebar</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="dropdown full-width dropdown-slide">
-                  <a
-                    href="#!"
-                    class="dropdown-toggle"
-                    data-toggle="dropdown"
-                    data-hover="dropdown"
-                    data-delay="350"
-                    role="button"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Pages <span class="tf-ion-ios-arrow-down"></span>
-                  </a>
-                  <div class="dropdown-menu">
-                    <div class="row">
-                      <div class="col-sm-3 col-xs-12">
-                        <ul>
-                          <li class="dropdown-header">Introduction</li>
-                          <li role="separator" class="divider"></li>
-                          <li>
-                            <a href="contact.html">Contact Us</a>
-                          </li>
-                          <li>
-                            <a href="about.html">About Us</a>
-                          </li>
-                          <li>
-                            <a href="404.html">404 Page</a>
-                          </li>
-                          <li>
-                            <a href="coming-soon.html">Coming Soon</a>
-                          </li>
-                          <li>
-                            <a href="faq.html">FAQ</a>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div class="col-sm-3 col-xs-12">
-                        <ul>
-                          <li class="dropdown-header">Dashboard</li>
-                          <li role="separator" class="divider"></li>
-                          <li>
-                            <a href="dashboard.html">User Interface</a>
-                          </li>
-                          <li>
-                            <a href="order.html">Orders</a>
-                          </li>
-                          <li>
-                            <a href="address.html">Address</a>
-                          </li>
-                          <li>
-                            <a href="profile-details.html">Profile Details</a>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div class="col-sm-3 col-xs-12">
-                        <ul>
-                          <li class="dropdown-header">Utility</li>
-                          <li role="separator" class="divider"></li>
-                          <li>
-                            <a href="login.html">Login Page</a>
-                          </li>
-                          <li>
-                            <a href="signin.html">Signin Page</a>
-                          </li>
-                          <li>
-                            <a href="forget-password.html">Forget Password</a>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div class="col-sm-3 col-xs-12">
-                        <a href="shop.html">
-                          <img
-                            class="img-responsive"
-                            src="images/shop/header-img.jpg"
-                            alt="menu image"
-                          />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="dropdown dropdown-slide">
-                  <a
-                    href="#!"
-                    class="dropdown-toggle"
-                    data-toggle="dropdown"
-                    data-hover="dropdown"
-                    data-delay="350"
-                    role="button"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Blog <span class="tf-ion-ios-arrow-down"></span>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a href="blog-left-sidebar.html">Blog Left Sidebar</a>
-                    </li>
-                    <li>
-                      <a href="blog-right-sidebar.html">Blog Right Sidebar</a>
-                    </li>
-                    <li>
-                      <a href="blog-full-width.html">Blog Full Width</a>
-                    </li>
-                    <li>
-                      <a href="blog-grid.html">Blog 2 Columns</a>
-                    </li>
-                    <li>
-                      <a href="blog-single.html">Blog Single</a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="dropdown dropdown-slide">
-                  <a
-                    href="#!"
-                    class="dropdown-toggle"
-                    data-toggle="dropdown"
-                    data-hover="dropdown"
-                    data-delay="350"
-                    role="button"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Elements <span class="tf-ion-ios-arrow-down"></span>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a href="typography.html">Typography</a>
-                    </li>
-                    <li>
-                      <a href="buttons.html">Buttons</a>
-                    </li>
-                    <li>
-                      <a href="alerts.html">Alerts</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </section>
+      <Home />
     </>
   );
 }
