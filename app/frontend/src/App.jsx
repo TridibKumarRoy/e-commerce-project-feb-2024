@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Home from "./pages/Home";
 import "jquery";
+import Router from "./router";
 
 function App() {
   useEffect(() => {
@@ -166,7 +167,7 @@ function App() {
 
   return (
     <>
-      <Home />
+      <Router />
     </>
   );
 }
