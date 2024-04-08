@@ -4,6 +4,7 @@ const product = require("./routes/productRouter");
 const errorMiddleware = require("./middleware/error")
 const user = require("./routes/userRouter");
 const order = require("./routes/orderRouter");
+const serviceReq = require("./routes/serviceRouter");
 const cookieParser = require("cookie-parser");
 
 const cors = require("cors");
@@ -22,6 +23,7 @@ app.use(cookieParser())
 app.use("/api/v1",product);
 app.use("/api/v1", user);
 app.use("/api/v1", order);
+app.use("/api/v1", serviceReq);
 
 //* middleware for error
 app.use(errorMiddleware)
