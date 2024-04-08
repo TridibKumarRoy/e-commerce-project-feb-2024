@@ -3,11 +3,29 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 const ErrorHandler = require("../utils/errorHandler");
 
 
-//todo: request a service
+//* request a service
 exports.createServiceReq = catchAsyncError(async (req, res, next) => {
-    const service = req.body;
+    const {
+      shippingInfo,
+      serviceNames,
+      paymentInfo,
+      servicePrice,
+      taxPrice,
+      visitingPrice,
+      totalPrice,
+    } = req.body;
 
-    const serviceRequest = await serviceRequest.create(service);
+    const serviceRequest = await ServiceRequest.create({
+      shippingInfo,
+      serviceNames,
+      paymentInfo,
+      servicePrice,
+      taxPrice,
+      visitingPrice,
+      totalPrice,
+      paidAt: Date.now(),
+      user: req.user._id,
+    });
 
     res.status(201).json({
       success: true,
@@ -16,7 +34,7 @@ exports.createServiceReq = catchAsyncError(async (req, res, next) => {
     
 })
 
-//todo: get service request details--admin
+//* get service request details--admin
 exports.getServiceReq = catchAsyncError(async (req, res, next) => {
     const serviceRequest = await ServiceRequest.findById(req.params.id);
 
@@ -32,7 +50,7 @@ exports.getServiceReq = catchAsyncError(async (req, res, next) => {
     });
 })
 
-//todo: get all service requests--admin
+//* get all service requests--admin
 exports.getAllServiceReq = catchAsyncError(async (req, res, next) => {
     const serviceRequests = await ServiceRequest.find();
 
@@ -68,7 +86,7 @@ exports.getAllServiceReq = catchAsyncError(async (req, res, next) => {
     });
 })
 
-//todo: delete a service request--admin
+//* delete a service request--admin
  exports.deleteServiceReq = catchAsyncError(async (req, res, next) => {
     const serviceRequest = await ServiceRequest.findById(req.params.id);
 

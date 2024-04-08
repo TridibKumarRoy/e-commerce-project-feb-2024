@@ -8,6 +8,7 @@ const {
   deleteServiceReq,
 } = require("../controller/serviceController");
 
+const router = express.Router();
 
 router.route("/service/new").post(isAuthenticated, createServiceReq);
 
@@ -25,4 +26,4 @@ router
     deleteServiceReq
   );
 
-const router = express.Router();
+module.exports = router;
