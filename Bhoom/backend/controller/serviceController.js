@@ -1,105 +1,85 @@
-const ServiceRequest = require("../models/serviceModel");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const ErrorHandler = require("../utils/errorHandler");
+const Service = require("../models/serviceModel");
 
+exports.newService = catchAsyncError(async(req,res,next) => {
+    service = req.body;
 
-//* request a service
-exports.createServiceReq = catchAsyncError(async (req, res, next) => {
-    const {
-      shippingInfo,
-      serviceNames,
-      paymentInfo,
-      servicePrice,
-      taxPrice,
-      visitingPrice,
-      totalPrice,
-    } = req.body;
-
-    const serviceRequest = await ServiceRequest.create({
-      shippingInfo,
-      serviceNames,
-      paymentInfo,
-      servicePrice,
-      taxPrice,
-      visitingPrice,
-      totalPrice,
-      paidAt: Date.now(),
-      user: req.user._id,
-    });
+    await Service.create(service);
 
     res.status(201).json({
-      success: true,
-      serviceRequest,
+        success: true,
+        service,
     });
-    
 })
 
-//* get service request details--admin
-exports.getServiceReq = catchAsyncError(async (req, res, next) => {
-    const serviceRequest = await ServiceRequest.findById(req.params.id);
-
-    if (!serviceRequest) {
-      return next(
-        new ErrorHandler(`Service Request does not exist with Id: ${req.params.id}`, 404)
-      );
+//* get service details--admin
+exports.getService = catchAsyncError(async (req, res, next) => { 
+    const service = await Service.findById(req.params.id);
+    
+    if (!service) {
+        return next(
+            new ErrorHandler(`Service does not exist with Id: ${req.params.id}`, 404)
+        );
     }
     
     res.status(200).json({
-      success: true,
-      serviceRequest,
+        success: true,
+        service,
     });
 })
 
-//* get all service requests--admin
-exports.getAllServiceReq = catchAsyncError(async (req, res, next) => {
-    const serviceRequests = await ServiceRequest.find();
+//* get all service details--admin
+exports.getAllService = catchAsyncError(async (req, res, next) => {
+    const services = await Service.find();
 
-    if (!serviceRequests) {
+    if (!services) {
         return next(
-            new ErrorHandler("No service requests found", 404)
+            new ErrorHandler("No services found", 404)
+        );
+    }
+    
+    res.status(200).json({
+        success: true,
+        services,
+    });
+})
+
+//* update service details--admin
+
+exports.updateService = catchAsyncError(async (req, res, next) => {
+    const service = await Service.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+    });
+
+    if (!service) {
+        return next(
+            new ErrorHandler(`Service does not exist with Id: ${req.params.id}`, 404)
         );
     }
 
     res.status(200).json({
-      success: true,
-      serviceRequests,
+        success: true,
+        service,
     });
 })
 
-//todo: update a service request--admin
- exports.updateServiceReq = catchAsyncError(async (req, res, next) => {
-    const serviceRequest = await ServiceRequest.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-      useFindAndModify: false,
-    });
+//* delete service details--admin
+exports.deleteService = catchAsyncError(async (req, res, next) => {
+    const service = await Service.findById(req.params.id);
 
-    if (!serviceRequest) {
-      return next(
-        new ErrorHandler(`Service Request does not exist with Id: ${req.params.id}`, 404)
-      );
+    if (!service) {
+        return next(
+            new ErrorHandler(`Service does not exist with Id: ${req.params.id}`, 404)
+        );
     }
 
-    res.status(200).json({
-      success: true,
-      serviceRequest,
-    });
-})
-
-//* delete a service request--admin
- exports.deleteServiceReq = catchAsyncError(async (req, res, next) => {
-    const serviceRequest = await ServiceRequest.findById(req.params.id);
-
-    if (!serviceRequest) {
-      return next(
-        new ErrorHandler(`Service Request does not exist with Id: ${req.params.id}`, 404)
-      );
-     }
-     
-     await serviceRequest.deleteOne({ _id: req.params.id });
+    await Service.deleteOne({ _id: req.params.id });
 
     res.status(200).json({
       success: true,
-      message: "Service Request Deleted Successfully",
+      message: "Service Deleted Successfully",
     });
 })

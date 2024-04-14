@@ -1,96 +1,44 @@
 const mongoose = require("mongoose");
 
-const serviceRequestSchema = new mongoose.Schema({
-  shippingInfo: {
-    address: {
-      type: String,
-      required: true,
-    },
-    city: {
-      type: String,
-      required: true,
-    },
-
-    state: {
-      type: String,
-      required: true,
-    },
-
-    country: {
-      type: String,
-      required: true,
-    },
-    pinCode: {
-      type: Number,
-      required: true,
-    },
-    phoneNo: {
-      type: Number,
-      required: true,
-    },
+const serviceSchema = new mongoose.Schema({
+  serviceName: {
+    type: String,
+    required: [true, "please enter service name"],
+    trim: true,
   },
-  serviceNames: [
+  description: {
+    type: String,
+    required: [true, "please enter service description"],
+  },
+  price: {
+    type: Number,
+    required: [true, "please enter service price"],
+    maxLength: [8, "price cannot exceed 8 character"],
+  },
+  ratings: {
+    type: Number,
+    default: 0,
+  },
+  images: [
     {
-      name: {
+      public_id: {
         type: String,
         required: true,
       },
-      description: {
+      url: {
         type: String,
         required: true,
       },
     },
   ],
-
-  user: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  paymentInfo: {
-    id: {
-      type: String,
-      required: true,
-    },
-    status: {
-      type: String,
-      required: true,
-    },
-  },
-  paidAt: {
-    type: Date,
-    required: true,
-  },
-  servicePrice: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  taxPrice: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  visitingPrice: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  totalPrice: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  serviceStatus: {
+  category: {
     type: String,
-    required: true,
-    default: "Processing",
+    required: [true, "please enter service category"],
   },
-  deliveredAt: Date,
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  subCategory: {
+    type: String,
+    required: [true, "please enter service sub category"],
   },
 });
 
-module.exports = mongoose.model("serviceRequest", serviceRequestSchema);
+module.exports = mongoose.model("Service",serviceSchema)

@@ -6,11 +6,19 @@ const {
   getAllServiceReq,
   updateServiceReq,
   deleteServiceReq,
+} = require("../controller/serviceRequestController");
+
+const {
+  newService,
+  getService,
+  getAllService,
+  updateService,
+  deleteService,
 } = require("../controller/serviceController");
 
 const router = express.Router();
-
-router.route("/service/new").post(isAuthenticated, createServiceReq);
+//* service request
+router.route("/servicerequest/new").post(isAuthenticated, createServiceReq);
 
 router
   .route("/admin/servicerequests")
@@ -25,5 +33,19 @@ router
     authorizedRole("admin"),
     deleteServiceReq
   );
+//* service
+  router
+    .route("/admin/service/new")
+    .post(isAuthenticated, authorizedRole("admin"), newService);
+
+router
+  .route("/admin/services")
+  .get(isAuthenticated, authorizedRole("admin"), getAllService);
+  
+router
+  .route("/admin/service/:id")
+  .get(isAuthenticated, authorizedRole("admin"), getService)
+  .put(isAuthenticated, authorizedRole("admin"), updateService)
+  .delete(isAuthenticated, authorizedRole("admin"), deleteService);
 
 module.exports = router;
