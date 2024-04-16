@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./navbar.css";
+import { AuthContext, useAuth } from '../../../store/store';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenuOpen2, setIsMenuOpen2] = useState(false);
+
+
+  //* Use the useContext hook to access the authentication context
+  const { token, setToken } = useContext(AuthContext);
+  console.log(token); //!
+  //* Define a function to handle logout
+  const handleLogout = () => {
+    //* Call the setToken function to set the token to null, effectively logging out the user
+    setToken(null);
+  };
+
+  const { isloggedIn } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -39,9 +52,22 @@ export const Header = () => {
           <a href="#" className="cart">
             &#x1F6D2;
           </a>
+
+          
+          {isloggedIn ? (
+
+          <button onClick={handleLogout} className="loginregister">Logout</button>
+            
+            ) : ( 
+              
           <a href="/login" className="loginregister">
             Login/SignUp
           </a>
+              
+          )} 
+          
+
+
           <a href="#">
             <img src="./profile.png" alt="profile" className="profile" />
           </a>

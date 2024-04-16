@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./LoginSignUp.css";
 import { alertGo, AlertGoContainer } from 'react-alert-go';
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../store/store';
 
 
 const LoginSignUp = () => {
 
     const [isLabelActive, setIsLabelActive] = useState(false);
     const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
+
+    //* Use the useContext hook to access the authentication context
+    const { token, setToken } = useContext(AuthContext);
+    const handleLogout = () => {
+        setToken(null);
+    };
 
     const navigate = useNavigate()
 
@@ -111,6 +118,10 @@ const LoginSignUp = () => {
                 console.log("response from server: ", res_data);
 
                 //* storing data in Cookies
+                // storeTokenInCookies(res_data.token);
+                //* get data from Cookies
+                // getDataFromCookies(res_data.token);
+
 
                 setUserRegister({
                     name: "",
