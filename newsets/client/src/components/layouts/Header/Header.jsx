@@ -7,13 +7,12 @@ export const Header = () => {
   const [isMenuOpen2, setIsMenuOpen2] = useState(false);
 
 
-  //* Use the useContext hook to access the authentication context
-  const { token, setToken } = useContext(AuthContext);
-  console.log(token); //!
+  
+  const { removeTokenAndCookie } = useAuth(); //! Destructure removeTokenAndCookie from the useAuth hook
   //* Define a function to handle logout
   const handleLogout = () => {
-    //* Call the setToken function to set the token to null, effectively logging out the user
-    setToken(null);
+    //* Call setToken with null to clear the token and log the user out
+    removeTokenAndCookie(); //! Destructure removeTokenAndCookie from the useAuth hook
   };
 
   const { isloggedIn } = useAuth();

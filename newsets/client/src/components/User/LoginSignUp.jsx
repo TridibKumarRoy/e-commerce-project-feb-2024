@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "./LoginSignUp.css";
 import { alertGo, AlertGoContainer } from 'react-alert-go';
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from '../../store/store';
+import { AuthContext, useAuth } from '../../store/store';
 
 
 const LoginSignUp = () => {
@@ -10,11 +10,17 @@ const LoginSignUp = () => {
     const [isLabelActive, setIsLabelActive] = useState(false);
     const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
 
-    //* Use the useContext hook to access the authentication context
-    const { token, setToken } = useContext(AuthContext);
-    const handleLogout = () => {
-        setToken(null);
-    };
+    //! Use the useContext hook to access the authentication context
+    // const { token, setToken } = useContext(AuthContext);
+    // const handleLogout = () => {
+    //     setToken(null);
+    // };
+
+    const { setToken } = useAuth(); // Destructure setToken from the useAuth hook
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+
 
     const navigate = useNavigate()
 
@@ -80,9 +86,14 @@ const LoginSignUp = () => {
             })
             if (response.ok) {
                 const res_data = await response.json();
-                console.log("response from server: ", res_data);
+                console.log("response from server: ", res_data.token);
 
-                //* storing data in Cookies
+                //! storing data in Cookies
+                const token = res_data.token;
+                // console.log(res_data.token);
+
+                //! Store the token using the setToken function from useAuth
+                setToken(token);
 
                 setUser({
                     email: "",

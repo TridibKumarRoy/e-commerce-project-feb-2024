@@ -9,11 +9,11 @@ import { AuthProvider } from './store/store.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <AuthProvider>
-  <React.StrictMode>
+  {/* <React.StrictMode> */}
   {/* <Provider store={store}> */}
     <App />
     {/* </Provider> */}
-    </React.StrictMode>
+    {/* </React.StrictMode> */}
   </AuthProvider>
 )
 
