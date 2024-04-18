@@ -220,3 +220,10 @@ button:hover {
         margin: 0vh 0px 3vh 0px;
     }
 }
+
+.username-b-p{
+    margin-left: 10px;
+    /* font-size: 20px; */
+    text-transform: uppercase;
+    color: rgb(255, 147, 147);
+}

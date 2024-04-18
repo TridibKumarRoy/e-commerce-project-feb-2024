@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Error404 } from './components/layouts/Error404/Error404';
 import LoginSignUp from './components/User/LoginSignUp';
 import ProductDetails from './components/layouts/Product/ProductDetails';
+import { AuthContext, useAuth } from './store/store';
 
 function App() {
 
@@ -21,6 +22,9 @@ function App() {
     reviews: ['Great product!', 'Fast shipping', 'Excellent quality'],
     _id: "fkfasfhuus8fu"
   }
+
+  const { isloggedIn } = useAuth();
+  console.log("is logged in",isloggedIn);
 
   return (
     <>

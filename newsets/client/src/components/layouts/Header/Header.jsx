@@ -16,6 +16,15 @@ export const Header = () => {
   };
 
   const { isloggedIn } = useAuth();
+  // console.log(isloggedIn);
+
+  //!getting user data
+  const { user,token } = useAuth();
+  console.log('user data : ', user);
+
+  // console.log(token);
+
+  //!getting user data end
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -28,7 +37,7 @@ export const Header = () => {
     <nav className="navbar">
       <a href="/">
       <div className="navbar-logo">
-        <img src=".\logo.png" alt="Logo" />
+          <img src=".\logo.png" alt="Logo" />
       </div></a>
 
       <div className={`navbar-links ${isMenuOpen ? "open" : ""}`}>
@@ -69,6 +78,7 @@ export const Header = () => {
 
           <a href="#">
             <img src="./profile.png" alt="profile" className="profile" />
+            <span className="username-b-p">{user.name}</span>
           </a>
         </div>
       </div>
