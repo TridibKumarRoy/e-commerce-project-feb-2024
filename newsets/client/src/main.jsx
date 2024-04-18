@@ -4,16 +4,11 @@ import App from './App.jsx'
 import './index.css'
 import { AuthProvider } from './store/store.jsx';
 
-// import { Provider } from 'react-redux'
-// import store from './store.js'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <AuthProvider>
-  {/* <React.StrictMode> */}
-  {/* <Provider store={store}> */}
     <App />
-    {/* </Provider> */}
-    {/* </React.StrictMode> */}
   </AuthProvider>
 )
 
