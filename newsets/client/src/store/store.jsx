@@ -39,7 +39,6 @@ export const AuthProvider = ({ children }) => {
   //! JWT AUTHENTICATION -- currently lagged in user data
   const userAuthentication = async () => {
     if (!token) {
-      //* Token is not available, handle appropriately (e.g., redirect to login page)
       return;
     }
 
@@ -53,19 +52,21 @@ export const AuthProvider = ({ children }) => {
         setUser(res_data.user);
         // console.log("user data from server: ", res_data.user);
       }
-        
 
     } catch (error) {
       console.error(error);
     }
-    
   }
 
   useEffect(() => {
     userAuthentication();
   },[])
-
   //! JWT AUTHENTICATION  ENDS HERE
+
+
+  //todo: fetching all data from server
+
+  //todo ends here
 
   return (
     <AuthContext.Provider value={{ token, setToken: setTokenAndCookie, isloggedIn, removeTokenAndCookie , user}}>

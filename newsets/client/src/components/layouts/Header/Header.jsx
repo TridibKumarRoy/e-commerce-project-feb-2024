@@ -7,7 +7,7 @@ export const Header = () => {
   const [isMenuOpen2, setIsMenuOpen2] = useState(false);
 
 
-  
+
   const { removeTokenAndCookie } = useAuth(); //! Destructure removeTokenAndCookie from the useAuth hook
   //* Define a function to handle logout
   const handleLogout = () => {
@@ -19,7 +19,7 @@ export const Header = () => {
   // console.log(isloggedIn);
 
   //!getting user data
-  const { user,token } = useAuth();
+  const { user, token } = useAuth();
   console.log('user data : ', user);
 
   // console.log(token);
@@ -36,9 +36,9 @@ export const Header = () => {
   return (
     <nav className="navbar">
       <a href="/">
-      <div className="navbar-logo">
+        <div className="navbar-logo">
           <img src=".\logo.png" alt="Logo" />
-      </div></a>
+        </div></a>
 
       <div className={`navbar-links ${isMenuOpen ? "open" : ""}`}>
         <input type="text" placeholder="Search" />
@@ -61,25 +61,27 @@ export const Header = () => {
             &#x1F6D2;
           </a>
 
-          
+
           {isloggedIn ? (
+            <>
+              <button onClick={handleLogout} className="loginregister">Logout</button>
+              <a href="#">
+                <img src="./profile.png" alt="profile" className="profile" />
+                <span className="username-b-p">{user.name}</span>
+              </a>
+            </>
 
-          <button onClick={handleLogout} className="loginregister">Logout</button>
-            
-            ) : ( 
-              
-          <a href="/login" className="loginregister">
-            Login/SignUp
-          </a>
-              
-          )} 
-          
+          ) : (
+
+            <a href="/login" className="loginregister">
+              Login/SignUp
+            </a>
+
+          )}
 
 
-          <a href="#">
-            <img src="./profile.png" alt="profile" className="profile" />
-            <span className="username-b-p">{user.name}</span>
-          </a>
+
+
         </div>
       </div>
       <div className="hamburger" onClick={toggleMenu}>

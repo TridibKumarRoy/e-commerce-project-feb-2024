@@ -5,7 +5,7 @@ const User = require("../models/userModel");
 
 exports.isAuthenticated = catchAsyncError(
     async (req, res, next) => {
-        // const {token} = req.cookies;
+        // const {token} = req.cookies.token;
         const token = req.header('Authorization');
 
         // console.log(token);
