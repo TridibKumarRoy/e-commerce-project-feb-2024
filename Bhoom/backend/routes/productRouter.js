@@ -17,7 +17,7 @@ const {
 router.route("/products").get(getAllProducts);
 
 router
-  .route("/admin/products/new")
+  .route("/products/new")
   .post(isAuthenticated, authorizedRole("admin", "seller"), createProduct);
 
 router
@@ -29,7 +29,8 @@ router
 router
   .route("/seller/products/:id")
   .put(isAuthenticated, authorizedRole("seller"), updateProductSeller)
-  .delete(isAuthenticated, authorizedRole("seller"), deleteProductSeller);
+  .delete(isAuthenticated, authorizedRole("seller"), deleteProductSeller)
+  .get(getProductDetails);
 
 router.route("/products/:id").get(getProductDetails);
 
