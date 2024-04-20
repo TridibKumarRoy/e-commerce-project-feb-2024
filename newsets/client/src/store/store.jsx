@@ -36,7 +36,11 @@ export const AuthProvider = ({ children }) => {
 
   let isloggedIn = !!token;
 
-  //! JWT AUTHENTICATION -- currently lagged in user data
+  
+  
+  //todo: fetching all data from server
+  //!User api 👨🏻‍⚖️
+  //! JWT AUTHENTICATION -- currently lagged in user data--1
   const userAuthentication = async () => {
     if (!token) {
       return;
@@ -63,13 +67,49 @@ export const AuthProvider = ({ children }) => {
   },[])
   //! JWT AUTHENTICATION  ENDS HERE
 
+  //!grt all users --2
+  
+  //!grt all users ends --2
 
-  //todo: fetching all data from server
+  //!User api ends 👨🏻‍⚖️
+
+
+
+  //! product api 🏍️
+  //* get all products --1
+  const getAllProducts = async () => {
+    try {
+      // const response = await fetch("http://localhost:5000/api/v1/products", {
+      const response = await fetch(`http://localhost:5000/api/v1/products?&page=1&price[gte]=12&price[lte]=150000&ratings[gte]=0`, {
+        method: "GET",
+        headers: { Authorization: `${ token }` },
+      })
+      if (!response.ok) {
+        throw new Error("Failed to fetch products");
+      }
+      if (response.ok) {
+        const res_data = await response.json();
+        // console.log("products from server: ", res_data.product);
+        // return res_data;
+        const allProducts = res_data.product
+        return allProducts;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+      //* get all products ends
+      
+      //* new product admin --2
+
+      //* new product admin ends
+  //! product api ends 🏍️
+
 
   //todo ends here
 
   return (
-    <AuthContext.Provider value={{ token, setToken: setTokenAndCookie, isloggedIn, removeTokenAndCookie , user}}>
+    <AuthContext.Provider value={{ token, setToken: setTokenAndCookie, isloggedIn, removeTokenAndCookie, user, getAllProducts }}>
       {children}
     </AuthContext.Provider>
   );
