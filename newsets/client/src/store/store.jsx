@@ -77,10 +77,15 @@ export const AuthProvider = ({ children }) => {
 
   //! product api 🏍️
   //* get all products --1
-  const getAllProducts = async () => {
+  const getAllProducts = async (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) => {
     try {
-      // const response = await fetch("http://localhost:5000/api/v1/products", {
-      const response = await fetch(`http://localhost:5000/api/v1/products?&page=1&price[gte]=12&price[lte]=150000&ratings[gte]=0`, {
+      let link = `http://localhost:5000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+      
+      if (category) {
+        link = `http://localhost:5000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+      }
+      
+      const response = await fetch(link, {
         method: "GET",
         headers: { Authorization: `${ token }` },
       })
@@ -98,18 +103,85 @@ export const AuthProvider = ({ children }) => {
       console.error(error);
     }
   }
-      //* get all products ends
-      
-      //* new product admin --2
+  //* get all products --1 ends
+  
+  //* Get All Products For Admin 2
+  const getAdminProduct =  async (dispatch) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/v1/products`, {
+        method: "GET",
+        headers: { Authorization: `${token}` },
+      })
+      if (!response.ok) {
+        throw new Error("Failed to fetch products");
+      }
+      if (response.ok) {
+        const res_data = await response.json();
+        // console.log("products from server: ", res_data.product);
+        // return res_data;
+        const allProductsAdmin = res_data.product
+        return allProductsAdmin;
+      }
 
-      //* new product admin ends
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  //* Get All Products For Admin --2 ends
+
+  //* Create Product --3
+  const createProduct =  async (dispatch) => {   //!not correct//
+    try {
+      dispatch({ type: NEW_PRODUCT_REQUEST });
+
+      // const config = {
+      //   headers: { "Content-Type": "application/json" },
+      // };
+
+      // const { data } = await axios.post(
+      //   `/api/v1/admin/product/new`,
+      //   productData,
+      //   config
+      // );
+
+      const response = await fetch(`http://localhost:5000/api/v1/admin/product/new`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `${token}` },
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch products");
+      }
+      if (response.ok) {
+        const res_data = await response.json();
+        // console.log("products from server: ", res_data.product);
+        // return res_data;
+        const allProductsAdmin = res_data.product
+        return allProductsAdmin;
+      }
+
+      // dispatch({
+      //   type: NEW_PRODUCT_SUCCESS,
+      //   payload: data,
+      // });
+    } catch (error) {
+      // dispatch({
+      //   type: NEW_PRODUCT_FAIL,
+      //   payload: error.response.data.message,
+      // });
+      console.error(error);
+    }
+  };
+  //* Create Product --3 ends
+      
+      //!
   //! product api ends 🏍️
 
 
   //todo ends here
 
   return (
-    <AuthContext.Provider value={{ token, setToken: setTokenAndCookie, isloggedIn, removeTokenAndCookie, user, getAllProducts }}>
+    <AuthContext.Provider value={{ token, setToken: setTokenAndCookie, isloggedIn, removeTokenAndCookie, user, getAllProducts, getAdminProduct, createProduct }}>
       {children}
     </AuthContext.Provider>
   );
