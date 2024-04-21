@@ -20,7 +20,7 @@ export const Header = () => {
 
   //!getting user data
   const { user, token } = useAuth();
-  console.log('user data : ', user);
+  // console.log('user data : ', user);
 
   // console.log(token);
 
