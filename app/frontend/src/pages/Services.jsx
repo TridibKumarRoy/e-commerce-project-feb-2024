@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react'
-import Navbar from '../components/navbar/Navbar'
-import Footer from '../components/footer/Footer'
-import Landing from '../components/home/Landing'
-import PopularProduct from '../components/home/PopularProduct'
-import AllCategory from '../components/home/AllCategory'
-import CTA from '../components/home/CTA'
+import React, { useEffect } from "react";
+import Search from "../components/products/Search";
+import ProductWIthFilter from "../components/products/ProductWIthFilter";
 import "jquery";
 
-const Home = () => {
+const Services = () => {
   useEffect(() => {
     (function ($) {
       "use strict";
@@ -24,6 +20,36 @@ const Home = () => {
         });
       }
 
+      //  Count Up
+      function counter() {
+        var oTop;
+        if ($(".counter").length !== 0) {
+          oTop = $(".counter").offset().top - window.innerHeight;
+        }
+        if ($(window).scrollTop() > oTop) {
+          $(".counter").each(function () {
+            var $this = $(this),
+              countTo = $this.attr("data-count");
+            $({
+              countNum: $this.text(),
+            }).animate(
+              {
+                countNum: countTo,
+              },
+              {
+                duration: 1000,
+                easing: "swing",
+                step: function () {
+                  $this.text(Math.floor(this.countNum));
+                },
+                complete: function () {
+                  $this.text(this.countNum);
+                },
+              }
+            );
+          });
+        }
+      }
       $(window).on("scroll", function () {
         counter();
         //.Scroll to top show/hide
@@ -73,12 +99,10 @@ const Home = () => {
   }, []);
   return (
     <>
-      <Landing />
-      <PopularProduct />
-      <AllCategory />
-      <CTA />
+      <Search />
+      <ProductWIthFilter />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Services;

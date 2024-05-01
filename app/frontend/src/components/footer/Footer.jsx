@@ -3,13 +3,13 @@ import React from "react";
 const Footer = () => {
   return (
     <>
-      <footer class="footer section section-sm">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-7 offset-md-1 offset-lg-0 mb-4 mb-lg-0">
-              <div class="block about">
+      <footer className="footer section section-sm">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-3 col-md-7 offset-md-1 offset-lg-0 mb-4 mb-lg-0">
+              <div className="block about">
                 <img src="images/logo-footer.png" alt="logo" />
-                <p class="alt-color">
+                <p className="alt-color">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -17,8 +17,8 @@ const Footer = () => {
                 </p>
               </div>
             </div>
-            <div class="col-lg-2 offset-lg-1 col-md-3 col-6 mb-4 mb-lg-0">
-              <div class="block">
+            <div className="col-lg-2 offset-lg-1 col-md-3 col-6 mb-4 mb-lg-0">
+              <div className="block">
                 <h4>Site Pages</h4>
                 <ul>
                   <li>
@@ -39,8 +39,8 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
-            <div class="col-lg-2 col-md-3 offset-md-1 offset-lg-0 col-6 mb-4 mb-md-0">
-              <div class="block">
+            <div className="col-lg-2 col-md-3 offset-md-1 offset-lg-0 col-6 mb-4 mb-md-0">
+              <div className="block">
                 <h4>Admin Pages</h4>
                 <ul>
                   <li>
@@ -61,26 +61,26 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
-            <div class="col-lg-4 col-md-7">
-              <div class="block-2 app-promotion">
-                <div class="mobile d-flex  align-items-center">
+            <div className="col-lg-4 col-md-7">
+              <div className="block-2 app-promotion">
+                <div className="mobile d-flex  align-items-center">
                   <a href="index.html">
                     <img src="images/footer/phone-icon.png" alt="mobile-icon" />
                   </a>
-                  <p class="mb-0">Get the Dealsy Mobile App and Save more</p>
+                  <p className="mb-0">Get the Dealsy Mobile App and Save more</p>
                 </div>
-                <div class="download-btn d-flex my-3">
+                <div className="download-btn d-flex my-3">
                   <a href="index.html">
                     <img
                       src="images/apps/google-play-store.png"
-                      class="img-fluid"
+                      className="img-fluid"
                       alt=""
                     />
                   </a>
-                  <a href="index.html" class=" ml-3">
+                  <a href="index.html" className=" ml-3">
                     <img
                       src="images/apps/apple-app-store.png"
-                      class="img-fluid"
+                      className="img-fluid"
                       alt=""
                     />
                   </a>
@@ -90,11 +90,11 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-      <footer class="footer-bottom">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6 text-center text-lg-left mb-3 mb-lg-0">
-              <div class="copyright">
+      <footer className="footer-bottom">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6 text-center text-lg-left mb-3 mb-lg-0">
+              <div className="copyright">
                 <p>
                   Copyright &copy;{" "}
                   <script>
@@ -102,36 +102,36 @@ const Footer = () => {
                     document.write(CurrentYear)
                   </script>
                   . Designed & Developed by{" "}
-                  <a class="text-white" href="https://themefisher.com">
+                  <a className="text-white" href="https://themefisher.com">
                     Themefisher
                   </a>
                 </p>
               </div>
             </div>
-            <div class="col-lg-6">
+            <div className="col-lg-6">
               {/* Social Icons */}
-              <ul class="social-media-icons text-center text-lg-right">
+              <ul className="social-media-icons text-center text-lg-right">
                 <li>
                   <a
-                    class="fa fa-facebook"
+                    className="fa fa-facebook"
                     href="https://www.facebook.com/themefisher"
                   ></a>
                 </li>
                 <li>
                   <a
-                    class="fa fa-twitter"
+                    className="fa fa-twitter"
                     href="https://www.twitter.com/themefisher"
                   ></a>
                 </li>
                 <li>
                   <a
-                    class="fa fa-pinterest-p"
+                    className="fa fa-pinterest-p"
                     href="https://www.pinterest.com/themefisher"
                   ></a>
                 </li>
                 <li>
                   <a
-                    class="fa fa-github-alt"
+                    className="fa fa-github-alt"
                     href="https://www.github.com/themefisher"
                   ></a>
                 </li>
@@ -141,8 +141,8 @@ const Footer = () => {
         </div>
 
         {/* To Top */}
-        <div class="scroll-top-to">
-          <i class="fa fa-angle-up"></i>
+        <div className="scroll-top-to">
+          <i className="fa fa-angle-up"></i>
         </div>
       </footer>
     </>

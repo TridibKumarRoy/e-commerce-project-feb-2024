@@ -2,43 +2,43 @@ import React from "react";
 
 const Form = () => {
   return (
-    <section class="login py-5 border-top-1">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-5 col-md-8 align-item-center">
-            <div class="border">
-              <h3 class="bg-gray p-4">Login Now</h3>
+    <section className="login py-5 border-top-1">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-5 col-md-8 align-item-center">
+            <div className="border">
+              <h3 className="bg-gray p-4">Login Now</h3>
               <form action="#">
-                <fieldset class="p-4">
+                <fieldset className="p-4">
                   <input
-                    class="form-control mb-3"
+                    className="form-control mb-3"
                     type="text"
                     placeholder="Username"
                     required
                   />
                   <input
-                    class="form-control mb-3"
+                    className="form-control mb-3"
                     type="password"
                     placeholder="Password"
                     required
                   />
-                  <div class="loggedin-forgot">
+                  <div className="loggedin-forgot">
                     <input type="checkbox" id="keep-me-logged-in" />
-                    <label for="keep-me-logged-in" class="pt-3 pb-2">
+                    <label for="keep-me-logged-in" className="pt-3 pb-2">
                       Keep me logged in
                     </label>
                   </div>
                   <button
                     type="submit"
-                    class="btn btn-primary font-weight-bold mt-3"
+                    className="btn btn-primary font-weight-bold mt-3"
                   >
                     Log in
                   </button>
-                  <a class="mt-3 d-block text-primary" href="#!">
+                  <a className="mt-3 d-block text-primary" href="#!">
                     Forget Password?
                   </a>
                   <a
-                    class="mt-3 d-inline-block text-primary"
+                    className="mt-3 d-inline-block text-primary"
                     href="register.html"
                   >
                     Register Now
