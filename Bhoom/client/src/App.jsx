@@ -11,22 +11,7 @@ import { AuthContext, useAuth } from './store/store';
 
 
 function App() {
-
-  const product = {
-    name: "BMW z4 v8",
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    image: [{ url: "https://www.bmwofdayton.com/static/dealer-20050/BMW-M850i-engine.jpg" }],
-    price: 100000,
-    ratings: 4.5,
-    category: 'Electronics',
-    stock: 10,
-    numberOfReviews: 5,
-    reviews: ['Great product!', 'Fast shipping', 'Excellent quality'],
-    _id: "fkfasfhuus8fu"
-  }
-
-
-  const { isloggedIn, getAllProducts } = useAuth();
+  const { isloggedIn, getAllProducts} = useAuth();
   console.log("is logged in", isloggedIn);
 
   //* getting all products
@@ -51,20 +36,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home products={allProducts} />} />
           <Route path="/login" element={<LoginSignUp />} />
-
-          <Route path="/product/:id" element={<ProductDetails
-            name={product.name}
-            description={product.description}
-            price={product.price}
-            ratings={product.ratings}
-            imageUrl={product.image[0].url}
-            category={product.category}
-            stock={product.stock}
-            numberOfReviews={product.numberOfReviews}
-            reviews={product.reviews}
-          />} />
-
-
+          <Route path="/product/:id" element={<ProductDetails/>} />
+          
           <Route path="*" element={<Error404 />} />
 
         </Routes>
@@ -75,3 +48,6 @@ function App() {
 }
 
 export default App;
+
+
+

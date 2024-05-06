@@ -8,7 +8,7 @@ export const Footer = () => {
       <div className="footer">
         <div className="footer-top">
           <div className="footer-top-logo">
-            <img src="\src\assets\logo.png" alt="logo" srcset="" />
+            <img src="\src\assets\logo4.png" alt="logo" srcset="" />
           </div>
           <div className="footer-top-button">
             <button>SUPPORT <span>&#8599;</span></button>
