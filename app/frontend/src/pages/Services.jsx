@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Search from "../components/products/Search";
-import ProductWIthFilter from "../components/products/ProductWIthFilter";
 import "jquery";
+import ServiceWIthFilter from "../components/products/ServiceWIthFilter";
 
 const Services = () => {
   useEffect(() => {
@@ -100,7 +100,7 @@ const Services = () => {
   return (
     <>
       <Search />
-      <ProductWIthFilter />
+      <ServiceWIthFilter />
     </>
   );
 };

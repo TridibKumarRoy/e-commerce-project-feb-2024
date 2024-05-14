@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ data }) => {
+const ServiceCard = ({ data }) => {
   const renderRatings = (rating) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -64,4 +64,4 @@ const ProductCard = ({ data }) => {
   );
 };
 
-export default ProductCard;
+export default ServiceCard;

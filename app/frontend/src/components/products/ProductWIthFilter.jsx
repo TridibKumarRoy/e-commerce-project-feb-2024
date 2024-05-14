@@ -1,18 +1,58 @@
-import React, { useState } from "react";
-import { product_list } from "../../static/data";
+import React, { useContext, useEffect, useState } from "react";
+import { PRODUCT_CATEGORY, product_list } from "../../static/data";
 import ProductCard from "../cards/ProductCard";
+import { ProductContext } from "../../context/ProductContext";
+import { Link, useLocation } from "react-router-dom";
 
-const ProductWIthFilter = () => {
-  const [seacrh, setSeacrh] = useState("");
+const ProductWIthFilter = ({ search, setSearch }) => {
+  const { products, getProducts, productTotalPage } =
+    useContext(ProductContext);
+  const location = useLocation();
+
+  const [page, setPage] = useState(1);
+
+  const handleClear = () => {
+    setSearch("");
+    getProducts();
+  };
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const myParam = queryParams.get("page");
+    setPage(myParam);
+  }, [location]);
+
+  useEffect(() => {
+    getProducts(page);
+  }, [page]);
   return (
     <section class="section-sm">
       <div class="container">
-        {seacrh && (
+        {search && (
           <div class="row">
             <div class="col-md-12">
-              <div class="search-result bg-gray">
-                <h2>Results For "Electronics"</h2>
-                <p>123 Results on 12 December, 2017</p>
+              <div
+                class="search-result bg-gray"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                {/* <h2>Results For "Electronics"</h2> */}
+                <p>{products?.length} Results</p>
+
+                <button
+                  onClick={handleClear}
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    color: "red",
+                    outline: "none",
+                  }}
+                >
+                  Clear
+                </button>
               </div>
             </div>
           </div>
@@ -24,73 +64,12 @@ const ProductWIthFilter = () => {
               <div class="widget category-list">
                 <h4 class="widget-header">All Category</h4>
                 <ul class="category-list">
-                  <li>
-                    <a href="category.html">
-                      Laptops <span>93</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Iphone <span>233</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Microsoft <span>183</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Monitors <span>343</span>
-                    </a>
-                  </li>
+                  {PRODUCT_CATEGORY.map((item, i) => (
+                    <li key={i}>
+                      <a href="category.html">{item.label}</a>
+                    </li>
+                  ))}
                 </ul>
-              </div>
-
-              <div class="widget category-list">
-                <h4 class="widget-header">Nearby</h4>
-                <ul class="category-list">
-                  <li>
-                    <a href="category.html">
-                      New York <span>93</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      New Jersy <span>233</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Florida <span>183</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      California <span>120</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Texas <span>40</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Alaska <span>81</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="widget filter">
-                <h4 class="widget-header">Show Produts</h4>
-                <select>
-                  <option>Popularity</option>
-                  <option value="1">Top rated</option>
-                  <option value="2">Lowest Price</option>
-                  <option value="4">Highest Price</option>
-                </select>
               </div>
 
               <div class="widget price-range w-100">
@@ -109,54 +88,12 @@ const ProductWIthFilter = () => {
                   </div>
                 </div>
               </div>
-
-              <div class="widget product-shorting">
-                <h4 class="widget-header">By Condition</h4>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="" />
-                    Brand New
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="" />
-                    Almost New
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="" />
-                    Gently New
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="" />
-                    Havely New
-                  </label>
-                </div>
-              </div>
             </div>
           </div>
           <div class="col-lg-9 col-md-8">
-            <div class="category-search-filter">
-              <div class="row">
-                <div class="col-md-6 text-center text-md-left">
-                  <strong>Short</strong>
-                  <select>
-                    <option>Most Recent</option>
-                    <option value="1">Most Popular</option>
-                    <option value="2">Lowest Price</option>
-                    <option value="4">Highest Price</option>
-                  </select>
-                </div>
-               
-              </div>
-            </div>
             <div class="product-grid-list">
-              <div class="row mt-30">
-                {product_list.map((item, i) => (
+              <div class="row">
+                {products.map((item, i) => (
                   <div class="col-lg-4 col-md-6" key={i}>
                     <ProductCard data={item} />
                   </div>
@@ -167,35 +104,32 @@ const ProductWIthFilter = () => {
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item">
-                    <a
+                    <Link
                       class="page-link"
-                      href="category.html"
+                      to={page > 1 ? `/products?page=${page - 1}`: `/products?page=${1}`}
                       aria-label="Previous"
                     >
                       <span aria-hidden="true">&laquo;</span>
                       <span class="sr-only">Previous</span>
-                    </a>
+                    </Link>
                   </li>
+                  {Array.from({ length: productTotalPage })?.map((item, i) => (
+                    <li class={`page-item ${i + 1 === page && "active"}`}>
+                      <Link class="page-link" to={`/products?page=${i + 1}`}>
+                        {i + 1}
+                      </Link>
+                    </li>
+                  ))}
+
                   <li class="page-item">
-                    <a class="page-link" href="category.html">
-                      1
-                    </a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="category.html">
-                      2
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="category.html">
-                      3
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="category.html" aria-label="Next">
+                    <Link
+                      class="page-link"
+                      to={page < productTotalPage? `/products?page=${Number(page) + 1}`: `/products?page=${productTotalPage}`}
+                      aria-label="Next"
+                    >
                       <span aria-hidden="true">&raquo;</span>
                       <span class="sr-only">Next</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>

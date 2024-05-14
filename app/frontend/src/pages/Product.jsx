@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CategorySlider from "../components/products/CategorySlider";
 import ProductList from "../components/products/ProductList";
 import Search from "../components/products/Search";
 import ProductWIthFilter from "../components/products/ProductWIthFilter";
 import "jquery";
+import { axiosInstance } from "../utils/axios";
+import { ProductContext } from "../context/ProductContext";
 
 const Product = () => {
   useEffect(() => {
@@ -99,12 +101,29 @@ const Product = () => {
       });
     })(jQuery);
   }, []);
+
+  const { setProducts } = useContext(ProductContext);
+
+  const [search, setSearch] = useState("");
+
+  const handleSearch = async (e) => {
+    try {
+      e.preventDefault();
+      const { data } = await axiosInstance.get(`/products?keyword=${search}`);
+      setProducts(data?.product);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      {/* <CategorySlider /> */}
-      <Search />
-      {/* <ProductList /> */}
-      <ProductWIthFilter />
+      <Search
+        search={search}
+        setSearch={setSearch}
+        handleSearch={handleSearch}
+      />
+      <ProductWIthFilter search={search} setSearch={setSearch} />
     </>
   );
 };

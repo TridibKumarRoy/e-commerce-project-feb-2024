@@ -16,7 +16,7 @@ const Navbar = () => {
           <div className="col-md-12">
             <nav className="navbar navbar-expand-lg navbar-light navigation">
               <Link className="navbar-brand" to="/">
-                <img src="images/bhoom-logo.png" alt="logo" />
+                <img src="/images/bhoom-logo.png" alt="logo" />
               </Link>
               <button
                 className="navbar-toggler"
