@@ -1,3 +1,49 @@
+export const PRODUCT_CATEGORY = [
+  {
+    label: "Parts & Accessories",
+  },
+  {
+    label: "Outfit",
+  },
+  {
+    label: "Wheels and Tyres",
+  },
+  {
+    label: "Comfort and Convenience",
+  },
+  {
+    label: "Performance Ppgrades",
+  },
+];
+
+export const SERVICES_CATEGORY = [
+  {
+    label: "Vehicle Maintenance",
+  },
+
+  {
+    label: "Repair Services",
+  },
+  {
+    label: "Tuning and Performance",
+  },
+  {
+    label: "Detailing and Cleaning",
+  },
+  {
+    label: "Customization",
+  },
+  {
+    label: "Diagnostic Services",
+  },
+  {
+    label: "Emergency Services",
+  },
+  {
+    label: "Specialty Services",
+  },
+];
+
 export const product_list = [
   {
     sno: 1,

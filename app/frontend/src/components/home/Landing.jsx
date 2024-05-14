@@ -2,81 +2,81 @@ import React from "react";
 
 const Landing = () => {
   return (
-    <section class="hero-area bg-1 text-center overly">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="content-block">
+    <section className="hero-area bg-1 text-center overly">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="content-block">
               <h1>Buy & Sell Near You </h1>
               <p>
                 Join the millions who buy and sell from each other <br />{" "}
                 everyday in local communities around the world
               </p>
-              <div class="short-popular-category-list text-center">
+              <div className="short-popular-category-list text-center">
                 <h2>Popular Category</h2>
-                <ul class="list-inline">
-                  <li class="list-inline-item">
+                <ul className="list-inline">
+                  <li className="list-inline-item">
                     <a href="category.html">
-                      <i class="fa fa-bed"></i> Hotel
+                      <i className="fa fa-bed"></i> Hotel
                     </a>
                   </li>
-                  <li class="list-inline-item">
+                  <li className="list-inline-item">
                     <a href="category.html">
-                      <i class="fa fa-grav"></i> Fitness
+                      <i className="fa fa-grav"></i> Fitness
                     </a>
                   </li>
-                  <li class="list-inline-item">
+                  <li className="list-inline-item">
                     <a href="category.html">
-                      <i class="fa fa-car"></i> Cars
+                      <i className="fa fa-car"></i> Cars
                     </a>
                   </li>
-                  <li class="list-inline-item">
+                  <li className="list-inline-item">
                     <a href="category.html">
-                      <i class="fa fa-cutlery"></i> Restaurants
+                      <i className="fa fa-cutlery"></i> Restaurants
                     </a>
                   </li>
-                  <li class="list-inline-item">
+                  <li className="list-inline-item">
                     <a href="category.html">
-                      <i class="fa fa-coffee"></i> Cafe
+                      <i className="fa fa-coffee"></i> Cafe
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
-            <div class="advance-search">
-              <div class="container">
-                <div class="row justify-content-center">
-                  <div class="col-lg-12 col-md-12 align-content-center">
+            <div className="advance-search">
+              <div className="container">
+                <div className="row justify-content-center">
+                  <div className="col-lg-12 col-md-12 align-content-center">
                     <form>
-                      <div class="form-row">
-                        <div class="form-group col-xl-4 col-lg-3 col-md-6">
+                      <div className="form-row">
+                        <div className="form-group col-xl-4 col-lg-3 col-md-6">
                           <input
                             type="text"
-                            class="form-control my-2 my-lg-1"
+                            className="form-control my-2 my-lg-1"
                             id="inputtext4"
                             placeholder="What are you looking for"
                           />
                         </div>
-                        <div class="form-group col-lg-3 col-md-6">
-                          <select class="w-100 form-control mt-lg-1 mt-md-2">
+                        <div className="form-group col-lg-3 col-md-6">
+                          <select className="w-100 form-control mt-lg-1 mt-md-2">
                             <option>Category</option>
                             <option value="1">Top rated</option>
                             <option value="2">Lowest Price</option>
                             <option value="4">Highest Price</option>
                           </select>
                         </div>
-                        <div class="form-group col-lg-3 col-md-6">
+                        <div className="form-group col-lg-3 col-md-6">
                           <input
                             type="text"
-                            class="form-control my-2 my-lg-1"
+                            className="form-control my-2 my-lg-1"
                             id="inputLocation4"
                             placeholder="Location"
                           />
                         </div>
-                        <div class="form-group col-xl-2 col-lg-3 col-md-6 align-self-center">
+                        <div className="form-group col-xl-2 col-lg-3 col-md-6 align-self-center">
                           <button
                             type="submit"
-                            class="btn btn-primary active w-100"
+                            className="btn btn-primary active w-100"
                           >
                             Search Now
                           </button>

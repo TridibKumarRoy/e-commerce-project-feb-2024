@@ -2,25 +2,25 @@ import React from "react";
 
 const AllCategory = () => {
   return (
-    <section class=" section">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="section-title">
+    <section className=" section">
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <div className="section-title">
               <h2>All Categories</h2>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Perferendis, provident!
               </p>
             </div>
-            <div class="row">
-              <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
-                <div class="category-block">
-                  <div class="header">
-                    <i class="fa fa-laptop icon-bg-1"></i>
+            <div className="row">
+              <div className="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
+                <div className="category-block">
+                  <div className="header">
+                    <i className="fa fa-laptop icon-bg-1"></i>
                     <h4>Electronics</h4>
                   </div>
-                  <ul class="category-list">
+                  <ul className="category-list">
                     <li>
                       <a href="category.html">
                         Laptops <span>93</span>
@@ -45,13 +45,13 @@ const AllCategory = () => {
                 </div>
               </div>
 
-              <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
-                <div class="category-block">
-                  <div class="header">
-                    <i class="fa fa-apple icon-bg-2"></i>
+              <div className="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
+                <div className="category-block">
+                  <div className="header">
+                    <i className="fa fa-apple icon-bg-2"></i>
                     <h4>Restaurants</h4>
                   </div>
-                  <ul class="category-list">
+                  <ul className="category-list">
                     <li>
                       <a href="category.html">
                         Cafe <span>393</span>
@@ -76,13 +76,13 @@ const AllCategory = () => {
                 </div>
               </div>
 
-              <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
-                <div class="category-block">
-                  <div class="header">
-                    <i class="fa fa-home icon-bg-3"></i>
+              <div className="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
+                <div className="category-block">
+                  <div className="header">
+                    <i className="fa fa-home icon-bg-3"></i>
                     <h4>Real Estate</h4>
                   </div>
-                  <ul class="category-list">
+                  <ul className="category-list">
                     <li>
                       <a href="category.html">
                         Farms <span>93</span>
@@ -107,13 +107,13 @@ const AllCategory = () => {
                 </div>
               </div>
 
-              <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
-                <div class="category-block">
-                  <div class="header">
-                    <i class="fa fa-shopping-basket icon-bg-4"></i>
+              <div className="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
+                <div className="category-block">
+                  <div className="header">
+                    <i className="fa fa-shopping-basket icon-bg-4"></i>
                     <h4>Shoppings</h4>
                   </div>
-                  <ul class="category-list">
+                  <ul className="category-list">
                     <li>
                       <a href="category.html">
                         Mens Wears <span>53</span>
@@ -138,13 +138,13 @@ const AllCategory = () => {
                 </div>
               </div>
 
-              <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
-                <div class="category-block">
-                  <div class="header">
-                    <i class="fa fa-briefcase icon-bg-5"></i>
+              <div className="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
+                <div className="category-block">
+                  <div className="header">
+                    <i className="fa fa-briefcase icon-bg-5"></i>
                     <h4>Jobs</h4>
                   </div>
-                  <ul class="category-list">
+                  <ul className="category-list">
                     <li>
                       <a href="category.html">
                         It Jobs <span>93</span>
@@ -169,13 +169,13 @@ const AllCategory = () => {
                 </div>
               </div>
 
-              <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
-                <div class="category-block">
-                  <div class="header">
-                    <i class="fa fa-car icon-bg-6"></i>
+              <div className="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
+                <div className="category-block">
+                  <div className="header">
+                    <i className="fa fa-car icon-bg-6"></i>
                     <h4>Vehicles</h4>
                   </div>
-                  <ul class="category-list">
+                  <ul className="category-list">
                     <li>
                       <a href="category.html">
                         Bus <span>193</span>
@@ -200,13 +200,13 @@ const AllCategory = () => {
                 </div>
               </div>
 
-              <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
-                <div class="category-block">
-                  <div class="header">
-                    <i class="fa fa-paw icon-bg-7"></i>
+              <div className="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
+                <div className="category-block">
+                  <div className="header">
+                    <i className="fa fa-paw icon-bg-7"></i>
                     <h4>Pets</h4>
                   </div>
-                  <ul class="category-list">
+                  <ul className="category-list">
                     <li>
                       <a href="category.html">
                         Cats <span>65</span>
@@ -231,13 +231,13 @@ const AllCategory = () => {
                 </div>
               </div>
 
-              <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
-                <div class="category-block">
-                  <div class="header">
-                    <i class="fa fa-laptop icon-bg-8"></i>
+              <div className="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6">
+                <div className="category-block">
+                  <div className="header">
+                    <i className="fa fa-laptop icon-bg-8"></i>
                     <h4>Services</h4>
                   </div>
-                  <ul class="category-list">
+                  <ul className="category-list">
                     <li>
                       <a href="category.html">
                         Cleaning <span>93</span>

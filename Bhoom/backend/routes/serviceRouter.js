@@ -40,7 +40,7 @@ router
 
 router
   .route("/admin/services")
-  .get(isAuthenticated, authorizedRole("admin"), getAllService);
+  .get(getAllService);
   
 router
   .route("/admin/service/:id")
