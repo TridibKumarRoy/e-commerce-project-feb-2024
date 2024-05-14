@@ -37,7 +37,7 @@ export const Header = () => {
     <nav className="navbar">
       <a href="/">
         <div className="navbar-logo">
-          <img src=".\logo.png" alt="Logo" />
+          <img src="\src\assets\logo4.png" alt="Logo" />
         </div></a>
 
       <div className={`navbar-links ${isMenuOpen ? "open" : ""}`}>

@@ -2,6 +2,7 @@ require('dotenv').config();
 const app = require("./app");
 const connectDB = require("./config/database")
 
+
 //*handling uncaught error     
 process.on("uncaughtException",(err)=>{
     console.log(`Error: ${err.message}`);
