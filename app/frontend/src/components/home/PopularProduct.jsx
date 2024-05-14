@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Slider from "react-slick";
 import "../../../public/plugins/slick/slick-theme.css";
 import "../../../public/plugins/slick/slick.css";
 import { product_list } from "../../static/data";
 import ProductCard from "../cards/ProductCard";
+import { ProductContext } from "../../context/ProductContext";
 
 const PopularProduct = () => {
   const settings = {
@@ -40,6 +41,7 @@ const PopularProduct = () => {
     ],
   };
 
+  const {products} = useContext(ProductContext)
 
   return (
     <section className="popular-deals section bg-gray">
@@ -58,7 +60,7 @@ const PopularProduct = () => {
         <div className="row">
           <div className="col-lg-12">
             <Slider {...settings}>
-              {product_list?.map((product, i) => (
+              {products?.slice(0, 5)?.map((product, i) => (
                 <div key={i} className="col-sm-12">
                   <ProductCard data={product} />
                 </div>

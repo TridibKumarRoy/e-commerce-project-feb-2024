@@ -12,36 +12,7 @@ const Landing = () => {
                 Join the millions who buy and sell from each other <br />{" "}
                 everyday in local communities around the world
               </p>
-              <div className="short-popular-category-list text-center">
-                <h2>Popular Category</h2>
-                <ul className="list-inline">
-                  <li className="list-inline-item">
-                    <a href="category.html">
-                      <i className="fa fa-bed"></i> Hotel
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a href="category.html">
-                      <i className="fa fa-grav"></i> Fitness
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a href="category.html">
-                      <i className="fa fa-car"></i> Cars
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a href="category.html">
-                      <i className="fa fa-cutlery"></i> Restaurants
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a href="category.html">
-                      <i className="fa fa-coffee"></i> Cafe
-                    </a>
-                  </li>
-                </ul>
-              </div>
+             
             </div>
             <div className="advance-search">
               <div className="container">

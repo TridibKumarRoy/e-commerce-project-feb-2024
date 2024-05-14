@@ -52,12 +52,12 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <a
+                    <Link
                       className="nav-link text-white add-button"
-                      href="ad-listing.html"
+                      to="/register"
                     >
                       Sign Up
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

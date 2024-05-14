@@ -75,7 +75,7 @@ const Home = () => {
     <>
       <Landing />
       <PopularProduct />
-      <AllCategory />
+      {/* <AllCategory /> */}
       <CTA />
     </>
   )

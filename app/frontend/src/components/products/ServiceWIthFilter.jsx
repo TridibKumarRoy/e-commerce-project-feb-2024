@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ProductContext } from "../../context/ProductContext";
 import ServiceCard from "../cards/ServiceCard";
+import { Link } from "react-router-dom";
 
 const ServiceWIthFilter = () => {
   const [seacrh, setSeacrh] = useState("");
@@ -26,73 +27,19 @@ const ServiceWIthFilter = () => {
                 <h4 class="widget-header">All Category</h4>
                 <ul class="category-list">
                   <li>
-                    <a href="category.html">
-                      Laptops <span>93</span>
-                    </a>
+                    <Link to=''>
+                      Home Service
+                    </Link>
                   </li>
                   <li>
-                    <a href="category.html">
-                      Iphone <span>233</span>
-                    </a>
+                    <Link to="">
+                      Road Side Assistance
+                    </Link>
                   </li>
-                  <li>
-                    <a href="category.html">
-                      Microsoft <span>183</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Monitors <span>343</span>
-                    </a>
-                  </li>
+                  
                 </ul>
               </div>
 
-              <div class="widget category-list">
-                <h4 class="widget-header">Nearby</h4>
-                <ul class="category-list">
-                  <li>
-                    <a href="category.html">
-                      New York <span>93</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      New Jersy <span>233</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Florida <span>183</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      California <span>120</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Texas <span>40</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Alaska <span>81</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="widget filter">
-                <h4 class="widget-header">Show Produts</h4>
-                <select>
-                  <option>Popularity</option>
-                  <option value="1">Top rated</option>
-                  <option value="2">Lowest Price</option>
-                  <option value="4">Highest Price</option>
-                </select>
-              </div>
 
               <div class="widget price-range w-100">
                 <h4 class="widget-header">Price Range</h4>
@@ -111,52 +58,12 @@ const ServiceWIthFilter = () => {
                 </div>
               </div>
 
-              <div class="widget product-shorting">
-                <h4 class="widget-header">By Condition</h4>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="" />
-                    Brand New
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="" />
-                    Almost New
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="" />
-                    Gently New
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="" />
-                    Havely New
-                  </label>
-                </div>
-              </div>
             </div>
           </div>
           <div class="col-lg-9 col-md-8">
-            <div class="category-search-filter">
-              <div class="row">
-                <div class="col-md-6 text-center text-md-left">
-                  <strong>Short</strong>
-                  <select>
-                    <option>Most Recent</option>
-                    <option value="1">Most Popular</option>
-                    <option value="2">Lowest Price</option>
-                    <option value="4">Highest Price</option>
-                  </select>
-                </div>
-               
-              </div>
-            </div>
+        
             <div class="product-grid-list">
-              <div class="row mt-30">
+              <div class="row">
                 {services.map((item, i) => (
                   <div class="col-lg-4 col-md-6" key={i}>
                     <ServiceCard data={item} />
