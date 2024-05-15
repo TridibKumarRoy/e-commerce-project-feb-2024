@@ -26,7 +26,7 @@ const ServiceCard = ({ data }) => {
     <div className="product-item bg-light">
       <div className="card">
         <div className="thumb-content">
-          <div className="price">${data?.price}</div>
+          <div className="price">&#8377;{data?.price}</div>
           <a href="single.html">
             <img
               style={{ height: 225, objectFit: "cover" }}
