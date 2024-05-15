@@ -8,9 +8,11 @@ const ProductProvider = ({ children }) => {
   const [services, setServices] = useState([]);
   const [productTotalPage, setProductTotalPage] = useState(1);
 
-  const getProducts = async (page) => {
+  const getProducts = async (page, category) => {
     try {
-      const { data } = await axiosInstance(`/products?page=${page || 1}`);
+      const { data } = await axiosInstance(
+        `/products?page=${page || 1}${category && "&category=" + category}`
+      );
       setProducts(data.product);
       console.log(data);
       setProductTotalPage(Math.ceil(data?.productCount / 6));

@@ -10,6 +10,7 @@ const ProductWIthFilter = ({ search, setSearch }) => {
   const location = useLocation();
 
   const [page, setPage] = useState(1);
+  const [category, setCategory] = useState("");
 
   const handleClear = () => {
     setSearch("");
@@ -23,8 +24,8 @@ const ProductWIthFilter = ({ search, setSearch }) => {
   }, [location]);
 
   useEffect(() => {
-    getProducts(page);
-  }, [page]);
+    getProducts(page, category);
+  }, [page, category]);
   return (
     <section class="section-sm">
       <div class="container">
@@ -62,11 +63,15 @@ const ProductWIthFilter = ({ search, setSearch }) => {
           <div class="col-lg-3 col-md-4">
             <div class="category-sidebar">
               <div class="widget category-list">
-                <h4 class="widget-header">All Category</h4>
+                <h4 style={{cursor: 'pointer'}} onClick={() => setCategory("")} class="widget-header">
+                  All Category
+                </h4>
                 <ul class="category-list">
                   {PRODUCT_CATEGORY.map((item, i) => (
                     <li key={i}>
-                      <a href="category.html">{item.label}</a>
+                      <a onClick={() => setCategory(item.label)} href="#">
+                        {item.label}
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -106,7 +111,11 @@ const ProductWIthFilter = ({ search, setSearch }) => {
                   <li class="page-item">
                     <Link
                       class="page-link"
-                      to={page > 1 ? `/products?page=${page - 1}`: `/products?page=${1}`}
+                      to={
+                        page > 1
+                          ? `/products?page=${page - 1}`
+                          : `/products?page=${1}`
+                      }
                       aria-label="Previous"
                     >
                       <span aria-hidden="true">&laquo;</span>
@@ -124,7 +133,11 @@ const ProductWIthFilter = ({ search, setSearch }) => {
                   <li class="page-item">
                     <Link
                       class="page-link"
-                      to={page < productTotalPage? `/products?page=${Number(page) + 1}`: `/products?page=${productTotalPage}`}
+                      to={
+                        page < productTotalPage
+                          ? `/products?page=${Number(page) + 1}`
+                          : `/products?page=${productTotalPage}`
+                      }
                       aria-label="Next"
                     >
                       <span aria-hidden="true">&raquo;</span>
