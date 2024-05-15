@@ -2,7 +2,7 @@ import React from "react";
 
 const CTA = () => {
   return (
-    <section className="call-to-action overly bg-3 section-sm">
+    <section className="call-to-action overly bg-1 section-sm">
       <div className="container">
         <div className="row justify-content-md-center text-center">
           <div className="col-md-8">
