@@ -26,7 +26,7 @@ const ProductCard = ({ data }) => {
     <div className="product-item bg-light">
       <div className="card">
         <div className="thumb-content">
-          <div className="price">${data?.price}</div>
+          <div className="price">&#8377;{data?.price}</div>
           <Link to={'/product/'+data._id}>
             <img
               style={{ height: 225, objectFit: "cover" }}

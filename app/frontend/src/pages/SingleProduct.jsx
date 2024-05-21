@@ -74,8 +74,8 @@ const SingleProduct = () => {
       order_id: data?.order?.id,
       callback_url: 'http://localhost:8000/payment/verification',
       prefill: {
-        name: 'Gaurav Kumar',
-        email: 'gaurav.kumar@example.com',
+        name: 'Tridib Roy',
+        email: 'tridib.kumar@example.com',
         contact: '9000090000',
       },
       notes: {
@@ -274,7 +274,7 @@ const SingleProduct = () => {
               <div class="sidebar">
                 <div class="widget price text-center">
                   <h4>Price</h4>
-                  <p>${details?.price}</p>
+                  <p>&#8377;{details?.price}</p>
                 </div>
                 <div
                   class="widget user text-center"
