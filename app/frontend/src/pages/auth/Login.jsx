@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../utils/axios";
 import { AuthContext } from "../../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,6 +24,7 @@ const Login = () => {
       setUser(data.user);
     } catch (error) {
       console.log(error);
+      toast.error(error?.response?.data?.message || 'Internal Server Error')
     }
   };
 

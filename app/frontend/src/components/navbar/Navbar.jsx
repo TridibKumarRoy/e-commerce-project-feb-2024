@@ -75,14 +75,34 @@ const Navbar = () => {
                       </li>
                     </>
                   ) : (
-                    <li className="nav-item">
-                      <button
-                        onClick={handleLogout}
-                        style={{ border: "none", outline: "none" }}
-                        className="nav-link add-button"
+                    <li class="nav-item dropdown">
+                    
+                      <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
                       >
-                        Logout
-                      </button>
+                        {user?.name}
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <Link class="dropdown-item" to="/my-profile">
+                            My Profile
+                          </Link>
+                        </li>
+                        <li>
+                          <Link class="dropdown-item" to="/orders ">
+                            Orders
+                          </Link>
+                        </li>
+                        <li>
+                          <a onClick={handleLogout} class="dropdown-item" href="#">
+                            Logout
+                          </a>
+                        </li>
+                      </ul>
                     </li>
                   )}
                 </ul>

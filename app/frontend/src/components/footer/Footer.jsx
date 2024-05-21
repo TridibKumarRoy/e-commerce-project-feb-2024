@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -8,7 +9,9 @@ const Footer = () => {
           <div className="row">
             <div className="col-lg-3 col-md-7 offset-md-1 offset-lg-0 mb-4 mb-lg-0">
               <div className="block about">
-                <img src="images/logo-footer.png" alt="logo" />
+              <Link className="navbar-brand" to="/">
+                <img src="/images/bhoom-logo.png" alt="logo" />
+              </Link>
                 <p className="alt-color">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -67,7 +70,9 @@ const Footer = () => {
                   <a href="index.html">
                     <img src="images/footer/phone-icon.png" alt="mobile-icon" />
                   </a>
-                  <p className="mb-0">Get the Dealsy Mobile App and Save more</p>
+                  <p className="mb-0">
+                    Get the Dealsy Mobile App and Save more
+                  </p>
                 </div>
                 <div className="download-btn d-flex my-3">
                   <a href="index.html">
