@@ -1,6 +1,6 @@
 const catchAsyncError = require("../middleware/catchAsyncError");
 const ErrorHandler = require("../utils/errorHandler");
-const Community = require("../models/contactModel");
+const Community = require("../models/communityModel");
 
 
 exports.newPost = catchAsyncError(
@@ -8,7 +8,7 @@ exports.newPost = catchAsyncError(
         const {
             
         } = req.body;
-        const post = await Contact.create({
+        const post = await Community.create({
             
         })
             
@@ -23,7 +23,7 @@ exports.newPost = catchAsyncError(
 
 exports.getPost = catchAsyncError(
     async (req, res, next) => {
-        const post = await Contact.findById(req.params.id);
+        const post = await Community.findById(req.params.id);
         if (!post) {
             return next(
                 new ErrorHandler(`Post does not exist with Id: ${req.params.id}`, 404)
@@ -38,7 +38,7 @@ exports.getPost = catchAsyncError(
 
 exports.updatePost = catchAsyncError(
     async (req, res, next) => {
-        const post = await Contact.findByIdAndUpdate(req.params.id, req.body, {
+        const post = await Community.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true,
         });
@@ -56,7 +56,7 @@ exports.updatePost = catchAsyncError(
 
 exports.deletePost = catchAsyncError(
     async (req, res, next) => {
-        const post = await Contact.findByIdAndDelete(req.params.id);
+        const post = await Community.findByIdAndDelete(req.params.id);
         if (!post) {
             return next(
                 new ErrorHandler(`Post does not exist with Id: ${req.params.id}`, 404)
