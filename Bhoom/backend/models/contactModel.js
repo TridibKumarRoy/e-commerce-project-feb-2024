@@ -17,6 +17,10 @@ const contactSchema = new mongoose.Schema({
     type: String,
     required: [true, "please enter your message"],
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("Contact", contactSchema);
