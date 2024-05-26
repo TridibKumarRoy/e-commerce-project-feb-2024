@@ -8,6 +8,7 @@ const serviceReq = require("./routes/serviceRouter");
 const paymentRoute = require("./routes/paymentRouter");
 const contact = require("./routes/contactRoutes");
 const community = require("./routes/communityRoutes");
+const cart = require("./routes/cartRoutes");
 const cookieParser = require("cookie-parser");
 
 const cors = require("cors");
@@ -30,6 +31,7 @@ app.use("/api/v1", serviceReq);
 app.use("/api/v1", paymentRoute);
 app.use("/api/v1", contact);
 app.use("/api/v1", community);
+app.use("/api/v1", cart);
 
 //* middleware for error
 app.use(errorMiddleware)
