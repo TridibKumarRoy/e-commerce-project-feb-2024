@@ -22,7 +22,7 @@ exports.getCart = catchAsyncError(async (req, res, next) => {
 //* add item
 exports.addItem = catchAsyncError(async (req, res, next) => {
   const { productId, quantity, price } = req.body;
-  let cart = await Cart.findOne({ userId: req.user.id });
+  let cart = await Cart.findOne( {userId: req.user.id} );
 
   if (cart) {
     // Check if item already exists in cart
