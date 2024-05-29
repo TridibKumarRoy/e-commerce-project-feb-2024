@@ -89,12 +89,11 @@ const MyOrders = () => {
                         cannot be undone.
                       </p>
                       <textarea
-                        class="form-control"
                         name="message"
                         id=""
                         cols="40"
                         rows="4"
-                        class="w-100 rounded"
+                        class="w-100 rounded form-control"
                       ></textarea>
                     </div>
                     <div class="modal-footer border-top-0 mb-3 mx-5 justify-content-center">

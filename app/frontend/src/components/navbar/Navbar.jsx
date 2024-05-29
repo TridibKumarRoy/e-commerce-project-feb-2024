@@ -57,6 +57,8 @@ const Navbar = () => {
                   ))}
                 </ul>
                 <ul className="navbar-nav ml-auto mt-10">
+                
+
                   {!user ? (
                     <>
                       {" "}
@@ -76,7 +78,6 @@ const Navbar = () => {
                     </>
                   ) : (
                     <li class="nav-item dropdown">
-                    
                       <a
                         class="nav-link dropdown-toggle"
                         href="#"
@@ -93,12 +94,21 @@ const Navbar = () => {
                           </Link>
                         </li>
                         <li>
+                          <Link class="dropdown-item" to="/cart ">
+                            Cart
+                          </Link>
+                        </li>
+                        <li>
                           <Link class="dropdown-item" to="/orders ">
                             Orders
                           </Link>
                         </li>
                         <li>
-                          <a onClick={handleLogout} class="dropdown-item" href="#">
+                          <a
+                            onClick={handleLogout}
+                            class="dropdown-item"
+                            href="#"
+                          >
                             Logout
                           </a>
                         </li>

@@ -11,6 +11,7 @@ import Register from "./pages/auth/Register";
 import ContactUs from "./pages/ContactUs";
 import MyProfile from "./pages/MyProfile";
 import MyOrders from "./pages/MyOrders";
+import Cart from "./pages/Cart";
 
 const Router = () => {
   return (
@@ -27,6 +28,7 @@ const Router = () => {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/my-profile" element={<MyProfile />} />
           <Route path="/orders" element={<MyOrders />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
