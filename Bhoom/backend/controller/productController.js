@@ -5,6 +5,7 @@ const ApiFeatures = require("../utils/apiFeatures");
 
 //* create product
 exports.createProduct = catchAsyncError(async (req, res, next) => {
+
   req.body.user = req.user.id; //* got id when from getJWTtoken function
 
   const product = await Product.create(req.body);
