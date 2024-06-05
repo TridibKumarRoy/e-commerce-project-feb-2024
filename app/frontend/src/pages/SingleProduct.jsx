@@ -89,6 +89,18 @@ const SingleProduct = () => {
     razor.open();
   };
 
+  const handleAdd = async () => {
+    try {
+      const {data} = await axiosInstance.post('/addtocart', {
+        productId:id,
+        quantity: 1,
+        price: details?.price
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <section class="section bg-gray">
@@ -295,12 +307,11 @@ const SingleProduct = () => {
                     </li>
 
                     <li class="list-inline-item">
-                      <a
-                        href="contact-us.html"
+                      <button onClick={handleAdd}
                         class="btn btn-contact d-inline-block btn-danger px-lg-5 my-1 px-md-3"
                       >
                         Cart
-                      </a>
+                      </button>
                     </li>
                   </ul>
                 </div>

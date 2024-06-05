@@ -4,7 +4,11 @@ const Cart = require("../models/cartModel");
 
 //* Get cart by user ID
 exports.getCart = catchAsyncError(async (req, res, next) => {
-  const cart = await Cart.findOne({ userId: req.user.id });
+  const cart = await Cart.findOne({ userId: req.user.id }).populate({
+    path: "items.productId",
+    model: "Product",
+    select: "name description price category images", // Select the fields you want to include
+  });
   if (!cart) {
     return next(
       new ErrorHandler(`Cart does not exist with Id: ${req.user.id}`, 404)
@@ -17,12 +21,10 @@ exports.getCart = catchAsyncError(async (req, res, next) => {
   });
 });
 
-
-
 //* add item
 exports.addItem = catchAsyncError(async (req, res, next) => {
   const { productId, quantity, price } = req.body;
-  let cart = await Cart.findOne( {userId: req.user.id} );
+  let cart = await Cart.findOne({ userId: req.user.id });
 
   if (cart) {
     // Check if item already exists in cart
@@ -60,57 +62,55 @@ exports.addItem = catchAsyncError(async (req, res, next) => {
 //* Update item quantity in cart
 exports.UpdateItemQuantity = catchAsyncError(async (req, res, next) => {
   const { quantity } = req.body;
-    let cart = await Cart.findOne({ userId: req.user.id });
-    if (!cart) {
-        return next(
-          new ErrorHandler(`Cart does not exist with Id: ${req.user.id}`, 404)
-        );
-    }
-
-    const itemIndex = cart.items.findIndex(
-      (item) => item.productId === req.params.productId
+  let cart = await Cart.findOne({ userId: req.user.id });
+  if (!cart) {
+    return next(
+      new ErrorHandler(`Cart does not exist with Id: ${req.user.id}`, 404)
     );
+  }
 
-    if (itemIndex > -1) {
-      let item = cart.items[itemIndex];
-      cart.total -= item.price * item.quantity;
-      item.quantity = quantity;
-      cart.total += item.price * quantity;
-      cart.items[itemIndex] = item;
+  const itemIndex = cart.items.findIndex(
+    (item) => item.productId === req.params.productId
+  );
 
-      cart = await cart.save();
-      res.json(cart);
-    } else {
-      res.status(404).json({ msg: "Item not found in cart" });
-    }
+  if (itemIndex > -1) {
+    let item = cart.items[itemIndex];
+    cart.total -= item.price * item.quantity;
+    item.quantity = quantity;
+    cart.total += item.price * quantity;
+    cart.items[itemIndex] = item;
+
+    cart = await cart.save();
+    res.json(cart);
+  } else {
+    res.status(404).json({ msg: "Item not found in cart" });
+  }
 });
 
 //* remove item
 exports.removeItem = catchAsyncError(async (req, res, next) => {
-  
-    let cart = await Cart.findOne({ userId: req.user.id });
-    if (!cart){ 
-        return next(
-            new ErrorHandler(`Cart does not exist with Id: ${req.user.id}`, 404)
-        );
-    }
-
-    const itemIndex = cart.items.findIndex(
-      (item) => item.productId === req.params.productId
+  let cart = await Cart.findOne({ userId: req.user.id });
+  if (!cart) {
+    return next(
+      new ErrorHandler(`Cart does not exist with Id: ${req.user.id}`, 404)
     );
+  }
 
-    if (itemIndex > -1) {
-      let item = cart.items[itemIndex];
-      cart.total -= item.price * item.quantity;
-      cart.items.splice(itemIndex, 1);
+  const itemIndex = cart.items.findIndex(
+    (item) => item.productId === req.params.productId
+  );
 
-      cart = await cart.save();
-      res.status(200).json({
-        success: true,
-        cart,
-      });
-    } else {
-      res.status(404).json({ msg: "Item not found in cart" });
-    }
-  
+  if (itemIndex > -1) {
+    let item = cart.items[itemIndex];
+    cart.total -= item.price * item.quantity;
+    cart.items.splice(itemIndex, 1);
+
+    cart = await cart.save();
+    res.status(200).json({
+      success: true,
+      cart,
+    });
+  } else {
+    res.status(404).json({ msg: "Item not found in cart" });
+  }
 });

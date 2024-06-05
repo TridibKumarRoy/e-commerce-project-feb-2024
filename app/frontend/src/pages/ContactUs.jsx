@@ -1,6 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
+import { axiosInstance } from "../utils/axios";
+import { toast } from "react-toastify";
+
+const supportList = [
+  "General Inquiry",
+  "Customer Support",
+  "Technical Support",
+  "Sales Inquiry",
+  "Billing and Payments",
+  "Feedback and Suggestions",
+  "Partnership Opportunities",
+  "Media and Public Relations",
+  "Careers and Job Applications",
+  "Website Issues",
+  "Product Information",
+  "Event Information",
+  "Complaint or Issue",
+  "Request for Information",
+  "Legal and Compliance",
+];
 
 const ContactUs = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [category, setCategory] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const { data } = await axiosInstance.post("/contact", {
+        name,
+        category,
+        email,
+        message,
+      });
+
+      toast.success("Thanks for contact us! We will shortly connect you");
+      setName('')
+      setCategory('')
+      setEmail('')
+      setMessage('')
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message || "Internal Server Error");
+    }
+  };
+
   return (
     <>
       <section class="page-title">
@@ -28,7 +74,7 @@ const ContactUs = () => {
               </div>
             </div>
             <div class="col-md-6">
-              <form action="#">
+              <form onSubmit={handleSubmit}>
                 <fieldset class="p-4">
                   <div class="form-group">
                     <div class="row">
@@ -38,6 +84,8 @@ const ContactUs = () => {
                           placeholder="Name *"
                           class="form-control"
                           required
+                          onChange={(e) => setName(e.target.value)}
+                          value={name}
                         />
                       </div>
                       <div class="col-lg-6 pt-2">
@@ -46,18 +94,29 @@ const ContactUs = () => {
                           placeholder="Email *"
                           class="form-control"
                           required
+                          onChange={(e) => setEmail(e.target.value)}
+                          value={email}
                         />
                       </div>
                     </div>
                   </div>
-                  <select name="" id="" class="form-control w-100">
-                    <option value="1">Select Category</option>
-                    <option value="1">Laptop</option>
-                    <option value="1">iPhone</option>
-                    <option value="1">Monitor</option>
-                    <option value="1">I need</option>
+                  <select
+                  value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    name=""
+                    id=""
+                    class="form-control w-100"
+                  >
+                    <option value="" disabled selected>
+                      Select Category
+                    </option>
+                    {supportList?.map((item, i) => (
+                      <option value={item}>{item}</option>
+                    ))}
                   </select>
                   <textarea
+                  value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     name="message"
                     id=""
                     placeholder="Message *"

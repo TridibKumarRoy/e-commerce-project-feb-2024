@@ -17,5 +17,4 @@ router.route("/updatecart/:productId").put(isAuthenticated, UpdateItemQuantity);
 
 router.route("/removefromcart/:productId").delete(isAuthenticated, removeItem);
 
-
 module.exports = router;
