@@ -166,10 +166,14 @@ exports.getComments = catchAsyncError(
 //* Like a comment
 exports.likeComment = catchAsyncError(
     async (req, res, next) => {
+        req.body.user = req.user.id;
         let comment = await Comment.findById(req.params.commentId);
         if (!comment) {
             return next(
-                new ErrorHandler(`Comment does not exist with Id: ${req.params.id}`, 404)
+              new ErrorHandler(
+                `Comment does not exist with Id: ${req.params.commentId}`,
+                404
+              )
             );
         }
          if (!comment.likes.includes(req.body.user)) {
