@@ -16,6 +16,10 @@ export const NAV_LINKS = [
         path: '/services'
     },
     {
+        label: 'Community',
+        path: '/community'
+    },
+    {
         label: 'Contact Us',
         path: '/contact-us'
     },
