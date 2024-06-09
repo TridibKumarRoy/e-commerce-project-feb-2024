@@ -1,68 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { axiosInstance } from "../utils/axios";
+import { useParams } from "react-router-dom";
+import { convertISOToDateTime } from "../utils/helper";
 
 const PostDetails = () => {
+  const [details, setDetails] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { id } = useParams();
+
+  const getDetails = async () => {
+    try {
+      const { data } = await axiosInstance("/post/" + id);
+      setDetails(data?.post)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      getDetails();
+    }
+  }, [id]);
   return (
     <section class="blog single-blog section">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8">
+          <div class="col-lg-8 mx-auto">
             <article class="single-post">
-              <h2>Donec id dolor in erat imperdiet.</h2>
+              <h2>{details?.title}</h2>
               <ul class="list-inline">
                 <li class="list-inline-item">
-                  by <a href="user-profile.html">Admin</a>
+                  by <a href="user-profile.html">{details?.user?.name}</a>
                 </li>
-                <li class="list-inline-item">Nov 22, 2016</li>
+                <li class="list-inline-item">{convertISOToDateTime(details?.createdAt)}</li>
               </ul>
-              <img src="/images/blog/post-4.jpg" alt="article-01" />
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                eiusmod tempor incididunt labore et dolore magna aliqua. Ut enim
-                ad minim veniam quis nostrud exercitation ullamco laboris nisi
-                ut aliquip.ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
 
-              <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto beatae
-                vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                voluptas sit aspernatur aut odit aut fugit.
-              </p>
-
-              <p>
-                sed quia consequuntur magni dolores eos qui ratione voluptatem
-                sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-                dolor sit amet, consectetur, adipisci velit, sed quia non
-                numquam eius modi tempora incidunt ut labore et dolore magnam
-                aliquam quaerat voluptatem.
-              </p>
-              <ul class="social-circle-icons list-inline">
-                <li class="list-inline-item text-center">
-                  <a class="fa fa-facebook" href="https://themefisher.com/"></a>
-                </li>
-                <li class="list-inline-item text-center">
-                  <a class="fa fa-twitter" href="https://themefisher.com/"></a>
-                </li>
-                <li class="list-inline-item text-center">
-                  <a
-                    class="fa fa-google-plus"
-                    href="https://themefisher.com/"
-                  ></a>
-                </li>
-                <li class="list-inline-item text-center">
-                  <a
-                    class="fa fa-pinterest-p"
-                    href="https://themefisher.com/"
-                  ></a>
-                </li>
-                <li class="list-inline-item text-center">
-                  <a class="fa fa-linkedin" href="https://themefisher.com/"></a>
-                </li>
-              </ul>
+              <div dangerouslySetInnerHTML={{__html: details?.content || ''}}></div>
             </article>
             <div class="block comment">
               <h4>Leave A Comment</h4>
@@ -102,73 +76,6 @@ const PostDetails = () => {
                 </div>
                 <button class="btn btn-transparent">Leave Comment</button>
               </form>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="sidebar">
-              <div class="widget search p-0">
-                <div class="input-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="expire"
-                    placeholder="Search..."
-                  />
-                  <span class="input-group-addon">
-                    <i class="fa fa-search px-3"></i>
-                  </span>
-                </div>
-              </div>
-              <div class="widget category">
-                <h5 class="widget-header">Categories</h5>
-                <ul class="category-list">
-                  <li>
-                    <a href="category.html">
-                      Appearel <span class="float-right">(2)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Accesories <span class="float-right">(5)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Business<span class="float-right">(7)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Entertaiment<span class="float-right">(3)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html">
-                      Education<span class="float-right">(9)</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="widget archive">
-                <h5 class="widget-header">Archives</h5>
-                <ul class="archive-list">
-                  <li>
-                    <a href="ad-list-view.html">January 2017</a>
-                  </li>
-                  <li>
-                    <a href="ad-list-view.html">February 2017</a>
-                  </li>
-                  <li>
-                    <a href="ad-list-view.html">March 2017</a>
-                  </li>
-                  <li>
-                    <a href="ad-list-view.html">April 2017</a>
-                  </li>
-                  <li>
-                    <a href="ad-list-view.html">May 2017</a>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>

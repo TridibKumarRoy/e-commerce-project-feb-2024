@@ -37,7 +37,7 @@ router
 
 // Get comments for a post
 router
-  .route("/post/:postId")
+  .route("/post/comment/:postId")
   .get( getComments);
 
 // Like a comment

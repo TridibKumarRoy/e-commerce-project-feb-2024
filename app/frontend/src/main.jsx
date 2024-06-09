@@ -6,13 +6,16 @@ import { BrowserRouter } from "react-router-dom";
 import ProductProvider from "./context/ProductContext.jsx";
 import AuthProvider from "./context/AuthContext.jsx";
 import CartProvider from "./context/CartContext.jsx";
+import CommunityProvider from "./context/ComunityContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AuthProvider>
       <ProductProvider>
         <CartProvider>
-          <App />
+          <CommunityProvider>
+            <App />
+          </CommunityProvider>
         </CartProvider>
       </ProductProvider>
     </AuthProvider>
