@@ -7,21 +7,21 @@ export const SIDEBAR_LINKS = [
   {
     label: "Products",
     path: "/products",
-    icon: "fas fa-home",
+    icon: "fas fa-table",
   },
   {
     label: "Services",
     path: "/services",
-    icon: "fas fa-home",
+    icon: "fas fa-taxi",
   },
   {
     label: "Order",
     path: "/order",
-    icon: "fas fa-home",
+    icon: "fas fa-table",
   },
   {
     label: "Customers",
     path: "/customers",
-    icon: "fas fa-home",
+    icon: "fas fa-users",
   },
 ];
