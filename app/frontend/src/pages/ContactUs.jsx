@@ -18,6 +18,7 @@ const supportList = [
   "Complaint or Issue",
   "Request for Information",
   "Legal and Compliance",
+  "Become a seller"
 ];
 
 const ContactUs = () => {
