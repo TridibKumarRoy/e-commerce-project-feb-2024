@@ -114,6 +114,7 @@ const SingleProduct = () => {
                     <li class="list-inline-item">
                       <i class="fa fa-folder-open-o"></i> Category
                       <a href="category.html">{details?.category}</a>
+                      {/* <p>Retings / Reviews : {details?.ratings}/{details?.numberOfReviewes}</p> */}
                     </li>
                   </ul>
                 </div>
