@@ -14,6 +14,7 @@ import MyOrders from "./pages/MyOrders";
 import Cart from "./pages/Cart";
 import Community from "./pages/Community";
 import PostDetails from "./pages/PostDetails";
+import AboutUs from "./pages/AboutUs";
 
 const Router = () => {
   return (
@@ -33,6 +34,7 @@ const Router = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/community" element={<Community />} />
           <Route path="/community/:id" element={<PostDetails />} />
+          <Route path="/aboutus" element={<AboutUs />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

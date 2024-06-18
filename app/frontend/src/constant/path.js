@@ -5,7 +5,7 @@ export const NAV_LINKS = [
     },
     {
         label: 'About Us',
-        path: '/about-us'
+        path: '/aboutus'
     },
     {
         label: 'Products',
