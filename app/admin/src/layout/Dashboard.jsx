@@ -3,18 +3,21 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import AuthGaurd from "../gaurd/AuthGaurd";
 
 const Dashboard = () => {
   return (
-    <div class="wrapper">
-      <Sidebar />
+    <AuthGaurd>
+      <div class="wrapper">
+        <Sidebar />
 
-      <div class="main-panel">
-        <Navbar />
-        <Outlet />
-        <Footer />
+        <div class="main-panel">
+          <Navbar />
+          <Outlet />
+          <Footer />
+        </div>
       </div>
-    </div>
+    </AuthGaurd>
   );
 };
 

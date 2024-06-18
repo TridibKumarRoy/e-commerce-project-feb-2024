@@ -4,9 +4,8 @@ class ApiFeatures {
         this.queryStr = queryStr;
     }
 
-    //*search
+    //* search
     search() {
-
         const keyword = this.queryStr.keyword
             ? {
                 name: {
@@ -20,14 +19,12 @@ class ApiFeatures {
         return this;
     }
 
-
     //* filter
     filter() {
-        const queryCopy = { ...this.queryStr }
-        // console.log(queryCopy);
+        const queryCopy = { ...this.queryStr };
 
-        //* removing same fields for category
-        const removingFields = ["keyword", "page", "limit"];
+        //* removing some fields for category
+        const removingFields = ["keyword", "page", "limit", "sort", "order"];
         removingFields.forEach((key) => delete queryCopy[key]);
 
         let queryStr = JSON.stringify(queryCopy);
@@ -37,11 +34,23 @@ class ApiFeatures {
         return this;
     }
 
-    pagination(resultPerPage){
-        const currentPage = Number(this.queryStr.page) || 1;
-        const skip = resultPerPage * (currentPage-1)
+    //* sort
+    sort() {
+        const sortBy = this.queryStr.sort || '-createdAt'; // Default to sorting by newest first
+        const sortOrder = this.queryStr.order || 'desc'; // Default to descending
+        const sortField = sortBy.replace('-', '');
+        const sortQuery = sortOrder === 'asc' ? sortField : `-${sortField}`;
 
-        this.query = this.query.limit(resultPerPage).skip(skip)   //*limit  and skip are mongodb function
+        this.query = this.query.sort(sortQuery);
+        return this;
+    }
+
+    //* pagination
+    pagination(resultPerPage) {
+        const currentPage = Number(this.queryStr.page) || 1;
+        const skip = resultPerPage * (currentPage - 1);
+
+        this.query = this.query.limit(resultPerPage).skip(skip);   //* limit and skip are MongoDB functions
 
         return this;
     }

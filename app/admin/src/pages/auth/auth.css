@@ -1,0 +1,44 @@
+.h-screen {
+  height: 100vh;
+}
+.login .card {
+  border: none;
+}
+.login .forms-inputs {
+  position: relative;
+}
+.login .forms-inputs span {
+  position: absolute;
+  top: -18px;
+  left: 10px;
+  background-color: #fff;
+  padding: 5px 10px;
+  font-size: 15px;
+}
+.login .forms-inputs input {
+  height: 50px;
+  border: 2px solid #eee;
+  width: 100%;
+  padding: 0px 10px;
+}
+.login .forms-inputs input:focus {
+  box-shadow: none;
+  outline: none;
+  border: 2px solid #000;
+}
+.login .btn {
+  height: 50px;
+}
+.login .success-data {
+  display: flex;
+  flex-direction: column;
+}
+.login .bxs-badge-check {
+  font-size: 90px;
+}
+
+.login .login-card h4 {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  font-size: 35px;
+}

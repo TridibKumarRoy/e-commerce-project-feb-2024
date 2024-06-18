@@ -19,25 +19,29 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 
 //* get all product
 exports.getAllProducts = catchAsyncError(async (req, res, next) => {
-  const resultPerPage = 6;
+  const defaultResultPerPage = 6;
+  const resultPerPage = parseInt(req.query.limit) || defaultResultPerPage;
+  const sortBy = req.query.sort || '-createdAt';
   const productCount = await Product.countDocuments();
 
   const apiFeatures = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
-    .pagination(resultPerPage);
+    .pagination(resultPerPage)
+    .sort(sortBy);
 
-  // const product = await Product.find()
   let product = await apiFeatures.query;
 
-  // console.log(product);
+  const totalPages = Math.ceil(productCount / resultPerPage);
 
   res.status(200).json({
     success: true,
     product,
     productCount,
+    totalPages
   });
 });
+
 
 //* get product Details
 exports.getProductDetails = catchAsyncError(async (req, res, next) => {

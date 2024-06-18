@@ -188,7 +188,7 @@ const SingleProduct = () => {
                       aria-labelledby="pills-home-tab"
                     >
                       <h3 class="tab-title">Product Description</h3>
-                      <p>{details?.description}</p>
+                      <div dangerouslySetInnerHTML={{__html: details?.description}}></div>
                     </div>
 
                     <div

@@ -35,10 +35,7 @@ const serviceSchema = new mongoose.Schema({
     type: String,
     required: [true, "please enter service category"],
   },
-  subCategory: {
-    type: String,
-    required: [true, "please enter service sub category"],
-  },
+
 });
 
 module.exports = mongoose.model("Service",serviceSchema)

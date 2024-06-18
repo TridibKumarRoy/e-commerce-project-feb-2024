@@ -3,7 +3,7 @@ const ErrorHandler = require("../utils/errorHandler");
 const Service = require("../models/serviceModel");
 
 exports.newService = catchAsyncError(async(req,res,next) => {
-    service = req.body;
+    const service = req.body;
 
     await Service.create(service);
 

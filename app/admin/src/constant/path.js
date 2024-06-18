@@ -6,22 +6,22 @@ export const SIDEBAR_LINKS = [
   },
   {
     label: "Products",
-    path: "/products",
+    path: "/dashboard/products",
     icon: "fas fa-table",
   },
   {
     label: "Services",
-    path: "/services",
+    path: "/dashboard/services",
     icon: "fas fa-taxi",
   },
   {
     label: "Order",
-    path: "/order",
+    path: "/dashboard/order",
     icon: "fas fa-table",
   },
   {
     label: "Customers",
-    path: "/customers",
+    path: "/dashboard/customers",
     icon: "fas fa-users",
   },
 ];

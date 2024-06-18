@@ -64,7 +64,7 @@ exports.myOrders = catchAsyncError(async (req, res, next) => {
 
 //* get all Orders -- Admin
 exports.getAllOrders = catchAsyncError(async (req, res, next) => {
-  const orders = await Order.find();
+  const orders = await Order.find().populate("user", "name email avatar");
 
   let totalAmount = 0;
 
@@ -177,7 +177,6 @@ exports.deleteOrder = catchAsyncError(async (req, res, next) => {
   });
 });
 
-
 //* delete Order -- Seller
 exports.deleteOrderSeller = catchAsyncError(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
@@ -185,9 +184,9 @@ exports.deleteOrderSeller = catchAsyncError(async (req, res, next) => {
   var orderItems = order.orderItems;
   const numOfOrderItems = orderItems.length;
 
-   if (!order) {
-     return next(new ErrorHandler("Order not found with this Id", 404));
-   }
+  if (!order) {
+    return next(new ErrorHandler("Order not found with this Id", 404));
+  }
 
   for (let i = orderItems.length - 1; i >= 0; i--) {
     const p = orderItems[i];
@@ -203,14 +202,13 @@ exports.deleteOrderSeller = catchAsyncError(async (req, res, next) => {
 
   if (orderItems.length == 0) {
     return next(new ErrorHandler("Order not found with this Id", 404));
-  }
-  else if (numOfOrderItems == orderItems.length) {
+  } else if (numOfOrderItems == orderItems.length) {
     await Order.deleteOne({ _id: req.params.id });
   }
 
-    res.status(200).json({
-      success: true,
-      seller,
-      orderItems,
-    });
+  res.status(200).json({
+    success: true,
+    seller,
+    orderItems,
+  });
 });
