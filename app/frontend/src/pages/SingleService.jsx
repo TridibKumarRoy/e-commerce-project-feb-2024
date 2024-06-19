@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
 import Slider from "react-slick";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosInstance } from "../utils/axios";
 import { AuthContext } from "../context/AuthContext";
-import { Modal, Button, Form } from "react-bootstrap";
-import { CartContext } from "../context/CartContext";
 
-const SingleProduct = () => {
-  const {getCartItem} = useContext(CartContext)
+const SingleService = () => {
   const settings = {
     dots: false,
     arrows: true,
@@ -20,6 +18,7 @@ const SingleProduct = () => {
   const [details, setDetails] = useState(null);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const [showModal, setShowModal] = useState(false);
   const [shippingInfo, setShippingInfo] = useState({
     address: "",
@@ -30,11 +29,11 @@ const SingleProduct = () => {
     phoneNo: "",
   });
 
-  const getSingleProduct = async () => {
+  const getSingleService = async () => {
     try {
-      const { data } = await axiosInstance.get(`/admin/products/${id}`);
+      const { data } = await axiosInstance.get(`/admin/service/${id}`);
       console.log(data);
-      setDetails(data.product);
+      setDetails(data.service);
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +41,7 @@ const SingleProduct = () => {
 
   useEffect(() => {
     if (id) {
-      getSingleProduct();
+      getSingleService();
     }
   }, [id]);
 
@@ -51,13 +50,13 @@ const SingleProduct = () => {
     for (let i = 0; i < 5; i++) {
       if (i < rating) {
         stars.push(
-          <li className="list-inline-item selected" key={i}>
+          <li key={i} className="list-inline-item selected">
             <i className="fa fa-star"></i>
           </li>
         );
       } else {
         stars.push(
-          <li className="list-inline-item" key={i}>
+          <li key={i} className="list-inline-item">
             <i className="fa fa-star"></i>
           </li>
         );
@@ -75,109 +74,34 @@ const SingleProduct = () => {
 
   const handleModalClose = () => setShowModal(false);
 
-  const handleShippingChange = (e) => {
-    setShippingInfo({ ...shippingInfo, [e.target.name]: e.target.value });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setShippingInfo({ ...shippingInfo, [name]: value });
   };
 
-  const handlePayment = async (orderDetails) => {
-    try {
-      const { data } = await axiosInstance.post('/checkout', {
-        amount: orderDetails.totalPrice
-      });
-
-      const options = {
-        key: 'rzp_test_J8xH3SkkAi6uxe',
-        amount: data?.order?.amount,
-        currency: 'INR',
-        name: 'bhoom',
-        description: 'Test Transaction',
-        image: 'https://example.com/your_logo',
-        order_id: data?.order?.id,
-        callback_url: 'http://localhost:8000/payment/verification',
-        prefill: {
-          name: user?.name,
-          email: user?.email,
-          contact: shippingInfo.phoneNo,
-        },
-        notes: {
-          address: shippingInfo.address,
-        },
-        theme: {
-          color: '#3399cc',
-        },
-        handler: function (response) {
-          handleOrderSave(response);
-        },
-      };
-
-      const razor = new window.Razorpay(options);
-      razor.open();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleOrderSave = async (paymentResponse) => {
+  const handleFormSubmit = async () => {
     const orderDetails = {
-      itemsPrice: details?.price,
+      servicePrice: details?.price,
       taxPrice: 36,
-      shippingPrice: 100,
+      visitingPrice: 100,
       totalPrice: details?.price + 36 + 100,
-      orderItems: [
+      serviceNames: [
         {
-          product: id,
-          name: details?.name,
-          price: details?.price,
-          image: details?.images[0]?.url || "sample",
-          quantity: 1,
+          name: details?.serviceName,
+          description: details?.description,
         },
       ],
       shippingInfo,
       paymentInfo: {
-        id: paymentResponse.razorpay_payment_id,
+        id: "sample payment info",
         status: "succeeded",
       },
     };
 
     try {
-      await axiosInstance.post("/order/new", orderDetails);
+      await axiosInstance.post("/servicerequest/new", orderDetails);
       setShowModal(false);
-      navigate("/thank-you", { state: { orderDetails } });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleFormSubmit = () => {
-    const orderDetails = {
-      itemsPrice: details?.price,
-      taxPrice: 36,
-      shippingPrice: 100,
-      totalPrice: details?.price + 36 + 100,
-      orderItems: [
-        {
-          product: id,
-          name: details?.name,
-          price: details?.price,
-          image: details?.images[0]?.url || "sample",
-          quantity: 1,
-        },
-      ],
-      shippingInfo,
-    };
-    handlePayment(orderDetails);
-  };
-
-  const handleAdd = async () => {
-    try {
-      await axiosInstance.post("/addtocart", {
-        productId: id,
-        quantity: 1,
-        price: details?.price,
-      });
-
-      getCartItem()
-      navigate('/cart')
+      navigate("/thank-you");
     } catch (error) {
       console.log(error);
     }
@@ -190,7 +114,9 @@ const SingleProduct = () => {
           <div className="row">
             <div className="col-lg-8">
               <div className="product-details">
-                <h1 className="product-title">{details?.name}</h1>
+                <h1 className="product-title" style={{ textTransform: "capitalize" }}>
+                  {details?.serviceName}
+                </h1>
                 <div className="product-meta">
                   <ul className="list-inline">
                     <li className="list-inline-item">
@@ -203,25 +129,13 @@ const SingleProduct = () => {
                 <div className="product-slider">
                   {details?.images?.length < 2 ? (
                     <div className="product-slider-item my-4">
-                      <img
-                        className="img-fluid w-100"
-                        src={details?.images[0].url}
-                        alt="product-img"
-                      />
+                      <img className="img-fluid w-100" src={details?.images[0].url} alt="product-img" />
                     </div>
                   ) : (
                     <Slider {...settings}>
                       {details?.images?.map((item, i) => (
-                        <div
-                          key={i}
-                          className="product-slider-item my-4"
-                          data-image={item?.url}
-                        >
-                          <img
-                            className="img-fluid w-100"
-                            src={item?.url}
-                            alt="product-img"
-                          />
+                        <div key={i} className="product-slider-item my-4" data-image={item?.url}>
+                          <img className="img-fluid w-100" src={item?.url} alt="product-img" />
                         </div>
                       ))}
                     </Slider>
@@ -229,11 +143,7 @@ const SingleProduct = () => {
                 </div>
 
                 <div className="content mt-5 pt-5">
-                  <ul
-                    className="nav nav-pills justify-content-center"
-                    id="pills-tab"
-                    role="tablist"
-                  >
+                  <ul className="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                     <li className="nav-item">
                       <a
                         className="nav-link active"
@@ -244,11 +154,11 @@ const SingleProduct = () => {
                         aria-controls="pills-home"
                         aria-selected="true"
                       >
-                        Product Details
+                        Service Details
                       </a>
                     </li>
 
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <a
                         className="nav-link"
                         id="pills-contact-tab"
@@ -260,7 +170,7 @@ const SingleProduct = () => {
                       >
                         Reviews
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                   <div className="tab-content" id="pills-tabContent">
                     <div
@@ -269,7 +179,7 @@ const SingleProduct = () => {
                       role="tabpanel"
                       aria-labelledby="pills-home-tab"
                     >
-                      <h3 className="tab-title">Product Description</h3>
+                      <h3 className="tab-title">Service Description</h3>
                       <div
                         dangerouslySetInnerHTML={{
                           __html: details?.description,
@@ -291,20 +201,16 @@ const SingleProduct = () => {
                           </div>
                         ) : (
                           details?.reviews?.map((item, i) => (
-                            <div className="media" key={i}>
-                              <img
-                                src="images/user/user-thumb.jpg"
-                                alt="avater"
-                              />
+                            <div key={i} className="media">
+                              <img src="images/user/user-thumb.jpg" alt="avater" />
                               <div className="media-body">
                                 <div className="ratings">
-                                  <ul className="list-inline">
-                                    {renderRatings(item.rating)}
-                                  </ul>
+                                  <ul className="list-inline">{renderRatings(item.rating)}</ul>
                                 </div>
                                 <div className="name">
                                   <h5>{item?.name}</h5>
                                 </div>
+                                <div className="date"></div>
                                 <div className="review-comment">
                                   <p>{item?.comment}</p>
                                 </div>
@@ -368,22 +274,21 @@ const SingleProduct = () => {
             <div className="col-lg-4">
               <div className="sidebar">
                 <div className="widget price text-center">
-                  <h4 className="widget-title">
-                    Price: ${details?.price.toFixed(2)}
-                  </h4>
-                  <Button
-                    variant="primary"
-                    onClick={handleBuyNow}
-                  >
-                    Buy Now
-                  </Button>
-                  <Button
-                  style={{marginLeft: 10}}
-                    variant="danger"
-                    onClick={handleAdd}
-                  >
-                    + Cart
-                  </Button>
+                  <h4>Price</h4>
+                  <p>&#8377;{details?.price}</p>
+                </div>
+                <div className="widget user text-center" style={{ paddingLeft: 0, paddingRight: 0, paddingTop: 15 }}>
+                  <ul className="list-inline mt-20" style={{ display: "flex", justifyContent: "center" }}>
+                    <li className="list-inline-item">
+                      <button
+                        onClick={handleBuyNow}
+                        style={{ textWrap: "nowrap" }}
+                        className="btn btn-offer d-inline-block btn-warning ml-n1 my-1 px-lg-4 px-md-3"
+                      >
+                        Book Now
+                      </button>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -393,57 +298,68 @@ const SingleProduct = () => {
 
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Shipping Information</Modal.Title>
+          <Modal.Title>Enter Shipping Information</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="formAddress">
+            <Form.Group>
               <Form.Label>Address</Form.Label>
               <Form.Control
                 type="text"
                 name="address"
                 value={shippingInfo.address}
-                onChange={handleShippingChange}
+                onChange={handleInputChange}
                 required
               />
             </Form.Group>
-            <Form.Group controlId="formCity">
+            <Form.Group>
               <Form.Label>City</Form.Label>
               <Form.Control
                 type="text"
                 name="city"
                 value={shippingInfo.city}
-                onChange={handleShippingChange}
+                onChange={handleInputChange}
                 required
               />
             </Form.Group>
-            <Form.Group controlId="formState">
+            <Form.Group>
               <Form.Label>State</Form.Label>
               <Form.Control
                 type="text"
                 name="state"
                 value={shippingInfo.state}
-                onChange={handleShippingChange}
+                onChange={handleInputChange}
                 required
               />
             </Form.Group>
-            <Form.Group controlId="formPinCode">
+            <Form.Group>
+              <Form.Label>Country</Form.Label>
+              <Form.Control
+                type="text"
+                name="country"
+                value={shippingInfo.country}
+                onChange={handleInputChange}
+                required
+                disabled
+              />
+            </Form.Group>
+            <Form.Group>
               <Form.Label>Pin Code</Form.Label>
               <Form.Control
                 type="text"
                 name="pinCode"
                 value={shippingInfo.pinCode}
-                onChange={handleShippingChange}
+                onChange={handleInputChange}
                 required
               />
             </Form.Group>
-            <Form.Group controlId="formPhoneNo">
+            <Form.Group>
               <Form.Label>Phone Number</Form.Label>
               <Form.Control
                 type="text"
                 name="phoneNo"
                 value={shippingInfo.phoneNo}
-                onChange={handleShippingChange}
+                onChange={handleInputChange}
                 required
               />
             </Form.Group>
@@ -454,7 +370,7 @@ const SingleProduct = () => {
             Close
           </Button>
           <Button variant="primary" onClick={handleFormSubmit}>
-            Proceed to Payment
+            Submit
           </Button>
         </Modal.Footer>
       </Modal>
@@ -462,4 +378,4 @@ const SingleProduct = () => {
   );
 };
 
-export default SingleProduct;
+export default SingleService;

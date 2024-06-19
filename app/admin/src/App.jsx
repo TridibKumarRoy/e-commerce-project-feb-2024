@@ -8,6 +8,7 @@ import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
 import Services from "./pages/Services";
 import AddService from "./pages/AddService";
+import Orders from "./pages/Orders";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="services" element={<Services />} />
           <Route path="services/:id" element={<AddService />} />
           <Route path="add-services" element={<AddService />} />
+          <Route path="order" element={<Orders />} />
         </Route>
         <Route path="/auth" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />

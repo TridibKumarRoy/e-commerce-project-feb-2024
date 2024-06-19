@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Search from "../components/products/Search";
 import "jquery";
 import ServiceWIthFilter from "../components/products/ServiceWIthFilter";
+import { ProductContext } from "../context/ProductContext";
+import { axiosInstance } from "../utils/axios";
 
 const Services = () => {
   useEffect(() => {
@@ -97,9 +99,30 @@ const Services = () => {
       });
     })(jQuery);
   }, []);
+
+  const { setServices } = useContext(ProductContext);
+
+  const [search, setSearch] = useState("");
+
+  const handleSearch = async (e) => {
+    try {
+      e.preventDefault();
+      const { data } = await axiosInstance.get(
+        `/admin/services?serviceName=${search}`
+      );
+      setServices(data?.services);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      <Search />
+      <Search
+        search={search}
+        setSearch={setSearch}
+        handleSearch={handleSearch}
+      />
       <ServiceWIthFilter />
     </>
   );

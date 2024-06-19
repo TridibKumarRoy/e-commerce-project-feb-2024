@@ -47,12 +47,7 @@ const ServiceCard = ({ data }) => {
                 {data.category}
               </a>
             </li>
-            {/* <li className="list-inline-item">
-              <a href="category.html">
-                <i className="fa fa-calendar"></i>
-                {data.date}
-              </a>
-            </li> */}
+         
           </ul>
           <p className="card-text">{data.description?.slice(0, 50)}</p>
           <div className="product-ratings">

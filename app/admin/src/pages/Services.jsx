@@ -67,7 +67,7 @@ const Services = () => {
               <div className="card card-round">
                 <div className="card-header d-flex justify-content-between">
                   <div className="card-head-row card-tools-still-right">
-                    <h4 className="card-title">All Products</h4>
+                    <h4 className="card-title">All Services</h4>
                   </div>
                 </div>
                 <div className="card-body">

@@ -44,7 +44,7 @@ router
   
 router
   .route("/admin/service/:id")
-  .get(isAuthenticated, authorizedRole("admin"), getService)
+  .get( getService)
   .put(isAuthenticated, authorizedRole("admin"), updateService)
   .delete(isAuthenticated, authorizedRole("admin"), deleteService);
 

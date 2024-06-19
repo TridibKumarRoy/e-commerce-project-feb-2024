@@ -77,7 +77,7 @@ const ProductWIthFilter = ({ search, setSearch }) => {
                 </ul>
               </div>
 
-              <div class="widget price-range w-100">
+              {/* <div class="widget price-range w-100">
                 <h4 class="widget-header">Price Range</h4>
                 <div class="block">
                   <input
@@ -92,7 +92,7 @@ const ProductWIthFilter = ({ search, setSearch }) => {
                     <span class="value">$10 - $5000</span>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div class="col-lg-9 col-md-8">

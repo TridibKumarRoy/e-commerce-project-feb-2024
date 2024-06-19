@@ -15,6 +15,8 @@ import Cart from "./pages/Cart";
 import Community from "./pages/Community";
 import PostDetails from "./pages/PostDetails";
 import AboutUs from "./pages/AboutUs";
+import SingleService from "./pages/SingleService";
+import ThankYou from "./pages/ThankYou";
 
 const Router = () => {
   return (
@@ -22,8 +24,10 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/products" element={<Product />} />
           <Route path="/product/:id" element={<SingleProduct />} />
+          <Route path="/service/:id" element={<SingleService />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services" element={<Services />} />
           <Route path="/login" element={<Login />} />

@@ -48,7 +48,8 @@ const ProductCard = ({ data }) => {
               </a>
             </li>
           </ul>
-          <p className="card-text">{data.description?.slice(0, 50)}</p>
+
+           <div dangerouslySetInnerHTML={{__html: data.description?.slice(0, 50)}}></div>
           <div className="product-ratings">
             <ul className="list-inline">{renderRatings(data.ratings)}</ul>
           </div>
