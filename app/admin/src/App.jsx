@@ -9,12 +9,13 @@ import AddProduct from "./pages/AddProduct";
 import Services from "./pages/Services";
 import AddService from "./pages/AddService";
 import Orders from "./pages/Orders";
+import ServiceReq from "./pages/ServiceReq";
 
 const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Navigate to="dashboard" />} />
+        <Route path="/" element={<Navigate to="/dashboard/products" />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Home />} />
           <Route path="products" element={<Products />} />
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="services/:id" element={<AddService />} />
           <Route path="add-services" element={<AddService />} />
           <Route path="order" element={<Orders />} />
+          <Route path="service-req" element={<ServiceReq />} />
         </Route>
         <Route path="/auth" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />

@@ -12,7 +12,7 @@ function parseDateString(dateString) {
 }
 
 
-const MyOrders = () => {
+const ServiceReq = () => {
   const [myOrders, setMyOrders] = useState([]);
   const {user} = useContext(AuthContext)
   const getMyOrders = async () => {
@@ -35,12 +35,12 @@ const MyOrders = () => {
          
           <div class="col-12">
             <div class="widget dashboard-container my-adslist">
-              <h3 class="widget-header">My Orders</h3>
+              <h3 class="widget-header">Service Request</h3>
 
               <table className="table">
                 <thead>
                   <tr>
-                    <th style={{ minWidth: 220 }}>Items</th>
+                    <th style={{ minWidth: 220 }}>Services</th>
                     <th style={{ minWidth: 150 }} className="text-end">
                       Order At
                     </th>
@@ -66,13 +66,11 @@ const MyOrders = () => {
                           >
                             Name
                           </td>
-                          <td style={{ fontWeight: "600" }}>Quantity</td>
                         </tr>
 
                         {item?.orderItems?.map((data, i) => (
                           <tr>
-                            <td>{data?.name}</td>
-                            <td className="text-end">{data?.quantity}</td>
+                            <td>{data?.serviceName}</td>
                           </tr>
                         ))}
                       </td>
@@ -98,4 +96,4 @@ const MyOrders = () => {
   );
 };
 
-export default MyOrders;
+export default ServiceReq;

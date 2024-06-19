@@ -6,7 +6,8 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { AuthContext } from "../context/AuthContext";
 
 const Cart = () => {
-  const { cartItems, setCartItems, getCartItem, total } = useContext(CartContext);
+  const { cartItems, setCartItems, getCartItem, total } =
+    useContext(CartContext);
   const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
 
@@ -117,12 +118,19 @@ const Cart = () => {
   };
 
   const handleOrderSave = async (paymentResponse) => {
+    const orderItems = cartItems.map(item => ({
+      name: item.productId.name,
+      quantity: item.quantity,
+      price: item.price,
+      _id: item._id
+  }));
+
     const orderDetails = {
       itemsPrice: 100,
       taxPrice: 36,
       shippingPrice: 100,
       totalPrice: total + 36 + 100,
-      orderItems: cartItems,
+      orderItems,
       shippingInfo,
       paymentInfo: {
         id: paymentResponse.razorpay_payment_id,
@@ -140,7 +148,6 @@ const Cart = () => {
   };
 
   const handleFormSubmit = () => {
-    
     handlePayment();
   };
   return (
@@ -176,7 +183,9 @@ const Cart = () => {
                           <h3 className="title">{item?.productId?.name}</h3>
                         </td>
                         <td className="product-category">
-                          <span className="categories">₹{item?.price * item.quantity}</span>
+                          <span className="categories">
+                            ₹{item?.price * item.quantity}
+                          </span>
                         </td>
                         <td className="product-category">
                           <button
@@ -278,7 +287,7 @@ const Cart = () => {
                     </li>
                     <li className="list-group-item d-flex justify-content-between">
                       <span>Total</span>
-                      <strong>₹{total + 100+36}</strong>
+                      <strong>₹{total + 100 + 36}</strong>
                     </li>
                   </ul>
 

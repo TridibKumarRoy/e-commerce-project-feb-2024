@@ -1,9 +1,9 @@
 export const SIDEBAR_LINKS = [
-  {
-    label: "Dashboard",
-    path: "/dashboard",
-    icon: "fas fa-home",
-  },
+  // {
+  //   label: "Dashboard",
+  //   path: "/dashboard",
+  //   icon: "fas fa-home",
+  // },
   {
     label: "Products",
     path: "/dashboard/products",
@@ -20,8 +20,13 @@ export const SIDEBAR_LINKS = [
     icon: "fas fa-table",
   },
   {
-    label: "Customers",
-    path: "/dashboard/customers",
-    icon: "fas fa-users",
+    label: "Service Request",
+    path: "/dashboard/service-req",
+    icon: "fas fa-table",
   },
+  // {
+  //   label: "Customers",
+  //   path: "/dashboard/customers",
+  //   icon: "fas fa-users",
+  // },
 ];

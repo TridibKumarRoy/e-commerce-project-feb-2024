@@ -103,6 +103,11 @@ const Navbar = () => {
                             Orders
                           </Link>
                         </li>
+                        {/* <li>
+                          <Link class="dropdown-item" to="/service-req ">
+                            Service Request
+                          </Link>
+                        </li> */}
                         <li>
                           <a
                             onClick={handleLogout}

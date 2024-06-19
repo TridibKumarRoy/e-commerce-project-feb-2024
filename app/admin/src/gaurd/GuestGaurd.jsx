@@ -9,7 +9,7 @@ const GuestGaurd = ({ children }) => {
 
   useEffect(() => {
     if (!isLoading && user) {
-      navigate("/dashboard");
+      navigate("/dashboard/products");
     }
   }, [user, isLoading]);
 

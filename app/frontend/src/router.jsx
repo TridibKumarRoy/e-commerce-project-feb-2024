@@ -17,6 +17,7 @@ import PostDetails from "./pages/PostDetails";
 import AboutUs from "./pages/AboutUs";
 import SingleService from "./pages/SingleService";
 import ThankYou from "./pages/ThankYou";
+import ServiceReq from "./pages/ServiceReq";
 
 const Router = () => {
   return (
@@ -35,6 +36,7 @@ const Router = () => {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/my-profile" element={<MyProfile />} />
           <Route path="/orders" element={<MyOrders />} />
+          <Route path="/service-req" element={<ServiceReq />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/community" element={<Community />} />
           <Route path="/community/:id" element={<PostDetails />} />

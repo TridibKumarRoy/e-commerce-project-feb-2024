@@ -369,7 +369,7 @@ const SingleProduct = () => {
               <div className="sidebar">
                 <div className="widget price text-center">
                   <h4 className="widget-title">
-                    Price: ${details?.price.toFixed(2)}
+                    Price: ₹{details?.price.toFixed(2)}
                   </h4>
                   <Button
                     variant="primary"

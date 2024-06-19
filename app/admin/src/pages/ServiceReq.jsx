@@ -15,19 +15,19 @@ function parseDateString(dateString) {
 const STATUS = [
   { label: "Pending" },
   { label: "Processing" },
-  { label: "Shipped" },
-  { label: "Delivered" },
+  { label: "Completed" },
+  { label: "Rejected" },
 ];
 
-const Orders = () => {
+const ServiceReq = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axiosInstance.get(`/admin/orders`);
+        const response = await axiosInstance.get(`/admin/servicerequests`);
         console.log(response);
-        setOrders(response.data.orders);
+        setOrders(response?.data?.serviceRequests);
       } catch (error) {
         console.error("Failed to fetch products", error);
       }
@@ -37,9 +37,10 @@ const Orders = () => {
   }, [setOrders]);
 
 
+
   const handleStatusChange = async (orderId, newStatus) => {
     try {
-      const response = await axiosInstance.put(`/admin/order/${orderId}`, {
+      const response = await axiosInstance.put(`/admin/servicerequest/${orderId}`, {
         status: newStatus,
       });
       // Assuming the API returns the updated order object, update the local state
@@ -52,17 +53,15 @@ const Orders = () => {
       console.error("Failed to update order status:", error);
     }
   };
-  
+
   return (
     <>
       <div className="container">
         <div className="page-inner">
           <div className="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
             <div>
-              <h3 className="fw-bold mb-3">Orders</h3>
+              <h3 className="fw-bold mb-3">Service Requests</h3>
             </div>
-
-            
           </div>
 
           <div className="row">
@@ -70,7 +69,7 @@ const Orders = () => {
               <div className="card card-round">
                 <div className="card-header d-flex justify-content-between">
                   <div className="card-head-row card-tools-still-right">
-                    <h4 className="card-title">All Orders</h4>
+                    <h4 className="card-title">All Service Requests</h4>
                   </div>
                 </div>
                 <div className="card-body">
@@ -81,7 +80,7 @@ const Orders = () => {
                           <thead>
                             <tr>
                               <th style={{ minWidth: 300 }}>Customer</th>
-                              <th style={{ minWidth: 220 }}>Items</th>
+                              <th style={{ minWidth: 220 }}>Services</th>
                               <th
                                 style={{ minWidth: 150 }}
                                 className="text-end"
@@ -90,7 +89,7 @@ const Orders = () => {
                               </th>
                               <th className="text-end">Price</th>
                               <th style={{ minWidth: 250 }}>
-                                shipping Address{" "}
+                                Address{" "}
                               </th>
                               <th
                                 className="text-center"
@@ -143,17 +142,13 @@ const Orders = () => {
                                     >
                                       Name
                                     </td>
-                                    <td style={{ fontWeight: "600" }}>
-                                      Quantity
-                                    </td>
+                                    
                                   </tr>
 
-                                  {item?.orderItems?.map((data, i) => (
+                                  {item?.serviceNames?.map((data, i) => (
                                     <tr>
                                       <td>{data?.name}</td>
-                                      <td className="text-end">
-                                        {data?.quantity}
-                                      </td>
+                                      
                                     </tr>
                                   ))}
                                 </td>
@@ -168,8 +163,13 @@ const Orders = () => {
                                   <select
                                     className="form-control"
                                     name="category"
-                                    value={item?.orderStatus}
-                                    onChange={(e) => handleStatusChange(item._id, e.target.value)}
+                                    value={item?.serviceStatus}
+                                    onChange={(e) =>
+                                      handleStatusChange(
+                                        item._id,
+                                        e.target.value
+                                      )
+                                    }
                                   >
                                     <option disabled={true} value="">
                                       Select Status
@@ -198,4 +198,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default ServiceReq;
